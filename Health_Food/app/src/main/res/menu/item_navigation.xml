@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/action_home"
+        android:id="@+id/home"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="home"/>
     <item
-        android:id="@+id/action_search"
+        android:id="@+id/menu"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="menu"/>
     <item
-        android:id="@+id/action_add_photo"
+        android:id="@+id/diary"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="diary"/>
     <item
-        android:id="@+id/action_favorite_alarm"
+        android:id="@+id/search"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="search"/>
