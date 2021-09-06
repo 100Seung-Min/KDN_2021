@@ -6,15 +6,15 @@
         android:icon="@drawable/ic_launcher_foreground"
         android:title="home"/>
     <item
-        android:id="@+id/menu"
-        android:enabled="true"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="menu"/>
-    <item
         android:id="@+id/diary"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="diary"/>
+    <item
+        android:id="@+id/eat"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="eat"/>
     <item
         android:id="@+id/search"
         android:enabled="true"

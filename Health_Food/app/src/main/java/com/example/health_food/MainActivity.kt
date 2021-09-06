@@ -5,12 +5,13 @@ import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.health_food.Fragment.Diary
+import com.example.health_food.Fragment.Eat
 import com.example.health_food.Fragment.MainFragment
 import com.example.health_food.Fragment.Search
 import com.example.health_food.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    val mbinding by lazy {ActivityMainBinding.inflate(layoutInflater)}
+    val mbinding by lazy { ActivityMainBinding.inflate(layoutInflater)}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mbinding.root)
@@ -24,12 +25,12 @@ class MainActivity : AppCompatActivity() {
                     replaceFrgment(MainFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.menu -> {
-                    replaceFrgment(MainFragment())
-                    return@setOnNavigationItemSelectedListener true
-                }
                 R.id.diary -> {
                     replaceFrgment(Diary())
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.eat -> {
+                    replaceFrgment(Eat())
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.search -> {
