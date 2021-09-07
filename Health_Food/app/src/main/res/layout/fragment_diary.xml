@@ -25,6 +25,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="7"
+            android:inputType="number"
+            android:maxLength="3"
             android:hint="오늘의 몸무게"/>
         <Button
             android:id="@+id/btn"

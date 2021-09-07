@@ -1,5 +1,6 @@
 package com.example.health_food
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -22,7 +23,9 @@ class FoodDtail : AppCompatActivity() {
             .into(mainbinding.dtailFoodImg)
         mainbinding.dtailFoodTxt.text = foodname
         mainbinding?.backBtn?.setOnClickListener {
-            findViewById<BottomNavigationView>(R.id.navigation).selectedItemId = R.id.home
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
+        mainbinding?.foodRecipeTxt?.text = "안녕\n하세요"
     }
 }
