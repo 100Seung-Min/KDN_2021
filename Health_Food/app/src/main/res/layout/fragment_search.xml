@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.Search">
+    tools:context=".Fragment.Search"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <EditText
+        android:id="@+id/search_food_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="재료를 입력하세요."/>
+    <ListView
+        android:id="@+id/search_food_lisst"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:divider="#999999"
+        android:dividerHeight="1dp"/>
 
-</FrameLayout>
+</LinearLayout>

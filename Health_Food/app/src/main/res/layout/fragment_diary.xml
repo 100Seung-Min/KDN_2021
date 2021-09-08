@@ -14,10 +14,10 @@
         android:id="@+id/chart"
         android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="160dp"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:weightSum="10">
         <EditText
@@ -27,6 +27,7 @@
             android:layout_weight="7"
             android:inputType="number"
             android:maxLength="3"
+            android:textSize="15sp"
             android:hint="오늘의 몸무게"/>
         <Button
             android:id="@+id/btn"
@@ -34,7 +35,7 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:text="입력"
-            android:textSize="20sp"/>
+            android:textSize="15sp"/>
     </LinearLayout>
 
 </LinearLayout>
