@@ -53,7 +53,6 @@ class MainFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        println("연결")
     }
 
     override fun onStop() {

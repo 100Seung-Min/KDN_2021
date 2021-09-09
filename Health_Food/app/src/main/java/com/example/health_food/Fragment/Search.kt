@@ -22,37 +22,31 @@ class Search : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        println("안녕")
+        val view = inflater.inflate(R.layout.fragment_search, container, false)
         foodsearch.add(Food(fooditem = "채수빈"))
-        foodsearch.add(Food(fooditem = "채수빈"))
-        foodsearch.add(Food(fooditem = "채수빈"))
-        foodsearch.add(Food(fooditem = "채수빈"))
-        foodsearch.add(Food(fooditem = "채수빈"))
+        foodsearch.add(Food(fooditem = "민도현"))
+        foodsearch.add(Food(fooditem = "아이유"))
+        foodsearch.add(Food(fooditem = "오종진"))
+        foodsearch.add(Food(fooditem = "조현서"))
+        foodsearch.add(Food(fooditem = "백승민"))
+        foodsearch.add(Food(fooditem = "김성길"))
+        foodsearch.add(Food(fooditem = "김동현"))
         foodlist.addAll(foodsearch)
         listviewadapter = ListViewAdapter(foodsearch)
-        view?.findViewById<ListView>(R.id.search_food_lisst)?.adapter = listviewadapter
+        view?.findViewById<ListView>(R.id.search_food_list)?.adapter = listviewadapter
         view?.findViewById<EditText>(R.id.search_food_edit)?.addTextChangedListener (object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                val text = view?.findViewById<EditText>(R.id.search_food_edit)?.text.toString()
-                search(text)
-                println("여기" + text)
-                Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
             }
 
             override fun afterTextChanged(s: Editable?) {
-                val text = view?.findViewById<EditText>(R.id.search_food_edit)?.text.toString()
-                search(text)
-                println("여기" + text)
-                Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val text = view?.findViewById<EditText>(R.id.search_food_edit)?.text.toString()
                 search(text)
-                println("여기" + text)
                 Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
             }
         })
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        return view
     }
     private fun search(text:String){
         foodsearch.clear()
