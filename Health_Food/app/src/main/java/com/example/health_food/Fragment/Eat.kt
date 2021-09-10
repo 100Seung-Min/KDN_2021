@@ -39,25 +39,46 @@ class Eat : Fragment() {
         when(i){
             1 -> {
                 if(!(eatbinding?.mon?.text.toString() == "") && !(eatbinding?.monKacl?.text.toString() == "")){
-                    if(mon_kacl == 0) { total_kacl += eatbinding?.monKacl.text.toString().toInt() }
-                    else {
-                        
+                    if(mon_kacl == 0) {
+                        mon_kacl += eatbinding?.monKacl.text.toString().toInt()
+                        total_kacl += mon_kacl
                     }
-                    eatbinding?.todayKacl.text = total_kacl.toString()
+                    else {
+                        total_kacl -= mon_kacl
+                        mon_kacl = eatbinding?.monKacl.text.toString().toInt()
+                        total_kacl += mon_kacl
+                    }
+                    eatbinding?.todayKacl.text = total_kacl.toString() + "kacl"
                 }
                 else Toast.makeText(activity, "모두 입력해주세요", Toast.LENGTH_SHORT).show()
             }
             2 -> {
                 if(!(eatbinding?.lun?.text.toString() == "") && !(eatbinding?.lunKacl?.text.toString() == "")){
-                    total_kacl += eatbinding?.lunKacl.text.toString().toInt()
-                    eatbinding?.todayKacl.text = total_kacl.toString()
+                    if(lun_kacl == 0) {
+                        lun_kacl += eatbinding?.lunKacl.text.toString().toInt()
+                        total_kacl += lun_kacl
+                    }
+                    else {
+                        total_kacl -= lun_kacl
+                        lun_kacl = eatbinding?.lunKacl.text.toString().toInt()
+                        total_kacl += lun_kacl
+                    }
+                    eatbinding?.todayKacl.text = total_kacl.toString() + "kacl"
                 }
                 else Toast.makeText(activity, "모두 입력해주세요", Toast.LENGTH_SHORT).show()
             }
             3 -> {
                 if(!(eatbinding?.din?.text.toString() == "") && !(eatbinding?.dinKacl?.text.toString() == "")){
-                    total_kacl += eatbinding?.dinKacl.text.toString().toInt()
-                    eatbinding?.todayKacl.text = total_kacl.toString()
+                    if(din_kacl == 0) {
+                        din_kacl += eatbinding?.dinKacl.text.toString().toInt()
+                        total_kacl += din_kacl
+                    }
+                    else {
+                        total_kacl -= din_kacl
+                        din_kacl = eatbinding?.dinKacl.text.toString().toInt()
+                        total_kacl += din_kacl
+                    }
+                    eatbinding?.todayKacl.text = total_kacl.toString() + "kacl"
                 }
                 else Toast.makeText(activity, "모두 입력해주세요", Toast.LENGTH_SHORT).show()
             }
