@@ -2,6 +2,7 @@ package com.example.health_food.Fragment
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ class Diary : Fragment() {
     private var mainbinding: FragmentDiaryBinding? = null
     lateinit var linedata: LineData
     lateinit var linedataset: LineDataSet
+    val text:ArrayList<Diary> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,7 @@ class Diary : Fragment() {
         val editText = mainbinding?.bodyWeight
         mainbinding?.calendar?.setOnDateChangeListener { view, year, month, dayOfMonth ->
             cal_day = year.toString() + "/" + (month + 1).toString() + "/" + dayOfMonth.toString()
-            viewCalendar(cal_day!!)
+            viewCalendar(cal_day!!, "")
         }
         mainbinding?.btn?.setOnClickListener {
             if(!editText?.text.toString().equals("")){
@@ -52,14 +54,13 @@ class Diary : Fragment() {
         return mainbinding!!.root
     }
 
-    fun viewCalendar(day: String){
+    fun viewCalendar(day: String, savetxt: String){
         val inputTxt = mainbinding?.inputTxt
         val viewTxt = mainbinding?.viewTxt
         val delBtn = mainbinding?.delBtn
         val editBtn = mainbinding?.editBtn
         val inputBtn = mainbinding?.inputBtn
-        val text:ArrayList<Diary> = ArrayList()
-        text.add(Diary(day = "2021/9/11", text = "안녕하세요"))
+        inputTxt?.setText(savetxt)
         for (i in 0..text.size - 1 step(1))
         {
             if(text.get(i).day.equals(day)){
@@ -69,16 +70,43 @@ class Diary : Fragment() {
                 editBtn?.visibility = View.VISIBLE
                 inputBtn?.visibility = View.INVISIBLE
                 viewTxt?.text = text.get(i).text
+                break
             }
             else{
-                println("여기" + text.get(i).day)
-                println("여기" + day)
                 inputTxt?.visibility = View.VISIBLE
                 viewTxt?.visibility = View.INVISIBLE
                 delBtn?.visibility = View.INVISIBLE
                 editBtn?.visibility = View.INVISIBLE
                 inputBtn?.visibility = View.VISIBLE
             }
+        }
+        inputBtn?.setOnClickListener {
+            text.add(Diary(day = day, text = inputTxt?.text.toString()))
+            viewCalendar(day, "")
+        }
+        editBtn?.setOnClickListener {
+            inputTxt?.visibility = View.VISIBLE
+            viewTxt?.visibility = View.INVISIBLE
+            delBtn?.visibility = View.INVISIBLE
+            editBtn?.visibility = View.INVISIBLE
+            inputBtn?.visibility = View.VISIBLE
+            for(i in 0..text.size-1 step(1)){
+                if(text.get(i).day.equals(day)) {
+                    text.removeIf { text.get(i).day.equals(day) }
+                }
+            }
+            viewCalendar(day, viewTxt?.text.toString())
+        }
+        delBtn?.setOnClickListener {
+            inputTxt?.visibility = View.VISIBLE
+            viewTxt?.visibility = View.INVISIBLE
+            delBtn?.visibility = View.INVISIBLE
+            editBtn?.visibility = View.INVISIBLE
+            inputBtn?.visibility = View.VISIBLE
+            for (i in 0..text.size - 1 step (1)) {
+                text.removeIf { text.get(i).day.equals(day) }
+            }
+            viewCalendar(day, "")
         }
     }
 
