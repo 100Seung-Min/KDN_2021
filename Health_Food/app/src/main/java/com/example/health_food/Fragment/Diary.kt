@@ -16,6 +16,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import java.util.*
 import kotlin.collections.ArrayList
 import com.example.health_food.model.Diary
+import java.text.SimpleDateFormat
 
 class Diary : Fragment() {
 
@@ -27,7 +28,7 @@ class Diary : Fragment() {
     private var mainbinding: FragmentDiaryBinding? = null
     lateinit var linedata: LineData
     lateinit var linedataset: LineDataSet
-    val text:ArrayList<Diary> = ArrayList()
+    var text:ArrayList<Diary> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +40,8 @@ class Diary : Fragment() {
     ): View? {
         mainbinding =  FragmentDiaryBinding.inflate(inflater, container, false)
         val editText = mainbinding?.bodyWeight
+        cal_day = SimpleDateFormat("yyyy/M/d").format(Calendar.getInstance().time)
+        viewCalendar(cal_day!!, "")
         mainbinding?.calendar?.setOnDateChangeListener { view, year, month, dayOfMonth ->
             cal_day = year.toString() + "/" + (month + 1).toString() + "/" + dayOfMonth.toString()
             viewCalendar(cal_day!!, "")
@@ -46,7 +49,7 @@ class Diary : Fragment() {
         mainbinding?.btn?.setOnClickListener {
             if(!editText?.text.toString().equals("")){
                 weight = editText?.text.toString().toFloat()
-                day = Calendar.DAY_OF_MONTH.toFloat() + 1
+                day = SimpleDateFormat("d").format(Calendar.getInstance().time).toFloat()
                 lineChart()
             }
             else Toast.makeText(activity , "몸무게를 입력해주세요", Toast.LENGTH_SHORT).show()
@@ -90,11 +93,14 @@ class Diary : Fragment() {
             delBtn?.visibility = View.INVISIBLE
             editBtn?.visibility = View.INVISIBLE
             inputBtn?.visibility = View.VISIBLE
-            for(i in 0..text.size-1 step(1)){
+            val num = text.size - 1
+            var I = 0
+            for(i in 0..num step(1)){
                 if(text.get(i).day.equals(day)) {
-                    text.removeIf { text.get(i).day.equals(day) }
+                    I = i
                 }
             }
+            text.removeAt(I)
             viewCalendar(day, viewTxt?.text.toString())
         }
         delBtn?.setOnClickListener {
@@ -103,9 +109,14 @@ class Diary : Fragment() {
             delBtn?.visibility = View.INVISIBLE
             editBtn?.visibility = View.INVISIBLE
             inputBtn?.visibility = View.VISIBLE
-            for (i in 0..text.size - 1 step (1)) {
-                text.removeIf { text.get(i).day.equals(day) }
+            val num = text.size - 1
+            var I = 0
+            for(i in 0..num step(1)){
+                if(text.get(i).day.equals(day)) {
+                    I = i
+                }
             }
+            text.removeAt(I)
             viewCalendar(day, "")
         }
     }
