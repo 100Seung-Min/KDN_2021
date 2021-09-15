@@ -2,7 +2,6 @@ package com.example.health_food.Fragment
 
 import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,11 +15,14 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import java.util.*
 import kotlin.collections.ArrayList
 import com.example.health_food.model.Diary
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import java.text.SimpleDateFormat
 
 class Diary : Fragment() {
 
-    var entry_chart = ArrayList<Entry>()
+    var entry_chart:ArrayList<Entry> = ArrayList()
+    var day_of_weak = ArrayList<String>()
     var ilinedataset = ArrayList<ILineDataSet>()
     var weight:Float = 0F
     var day:Float = 0F
@@ -28,6 +30,7 @@ class Diary : Fragment() {
     private var mainbinding: FragmentDiaryBinding? = null
     lateinit var linedata: LineData
     lateinit var linedataset: LineDataSet
+    var xAxis: XAxis? = null
     var text:ArrayList<Diary> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -122,14 +125,42 @@ class Diary : Fragment() {
     }
 
     fun lineChart(){
-        println(day)
-        println(weight)
-        entry_chart.add(Entry(day,weight))
+        addChart()
+        addLabel()
         linedataset = LineDataSet(entry_chart, "나의 몸무게")
         ilinedataset.add(linedataset)
-        linedata = LineData(ilinedataset)
+        linedata = LineData(linedataset)
         linedataset.setColor(Color.BLACK)
         linedataset.setCircleColor(Color.BLACK)
         mainbinding?.chart?.data = (linedata)
+        mainbinding?.chart?.axisRight?.setDrawLabels(false)
+        mainbinding?.chart?.axisRight?.setDrawGridLines(false)
+        mainbinding?.chart?.axisLeft?.setAxisMaxValue(100f)
+        mainbinding?.chart?.axisLeft?.setAxisMinValue(60f)
+        mainbinding?.chart?.legend?.isEnabled = false
+        xAxis = mainbinding?.chart?.xAxis
+        xAxis?.setDrawLabels(true)
+        xAxis?.valueFormatter = IndexAxisValueFormatter(day_of_weak)
+        xAxis?.position = XAxis.XAxisPosition.BOTTOM
+    }
+    fun addChart(){
+        entry_chart.clear()
+        entry_chart.add(Entry(day-6, 70f))
+        entry_chart.add(Entry(day-5, 68f))
+        entry_chart.add(Entry(day-4, 72f))
+        entry_chart.add(Entry(day-3, 65f))
+        entry_chart.add(Entry(day-2, 64f))
+        entry_chart.add(Entry(day-1, 64f))
+        entry_chart.add(Entry(day,weight))
+    }
+    fun addLabel(){
+        day_of_weak.clear()
+        day_of_weak.add("${day.toInt() - 6}일")
+        day_of_weak.add("${day.toInt() - 5}일")
+        day_of_weak.add("${day.toInt() - 4}일")
+        day_of_weak.add("${day.toInt() - 3}일")
+        day_of_weak.add("${day.toInt() - 2}일")
+        day_of_weak.add("${day.toInt() - 1}일")
+        day_of_weak.add("${day.toInt()}일")
     }
 }

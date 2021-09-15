@@ -233,5 +233,4 @@
             android:background="@drawable/conner_user"
             android:text="제출"/>
     </LinearLayout>
-
 </LinearLayout>

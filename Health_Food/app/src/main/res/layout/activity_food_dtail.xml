@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/box_inset_layout_padding"
     tools:context=".FoodDtail"
     android:orientation="vertical">
 
@@ -35,4 +34,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"/>
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/piechart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>
