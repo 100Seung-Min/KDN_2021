@@ -17,6 +17,7 @@ import kotlin.collections.ArrayList
 import com.example.health_food.model.Diary
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
 import java.text.SimpleDateFormat
 
 class Diary : Fragment() {
@@ -126,22 +127,28 @@ class Diary : Fragment() {
 
     fun lineChart(){
         addChart()
-        addLabel()
         linedataset = LineDataSet(entry_chart, "나의 몸무게")
         ilinedataset.add(linedataset)
         linedata = LineData(linedataset)
         linedataset.setColor(Color.BLACK)
         linedataset.setCircleColor(Color.BLACK)
         mainbinding?.chart?.data = (linedata)
+        xAxis = mainbinding?.chart?.xAxis
+        xAxis?.valueFormatter = object : ValueFormatter(){
+            override fun getFormattedValue(value: Float): String {
+                return "${value.toInt()}일"
+            }
+        }
         mainbinding?.chart?.axisRight?.setDrawLabels(false)
         mainbinding?.chart?.axisRight?.setDrawGridLines(false)
-        mainbinding?.chart?.axisLeft?.setAxisMaxValue(100f)
-        mainbinding?.chart?.axisLeft?.setAxisMinValue(60f)
+        mainbinding?.chart?.axisLeft?.setAxisMaxValue(entry_chart.get(1).y + 20)
+        mainbinding?.chart?.axisLeft?.setAxisMinValue(entry_chart.get(1).y - 20)
         mainbinding?.chart?.legend?.isEnabled = false
-        xAxis = mainbinding?.chart?.xAxis
         xAxis?.setDrawLabels(true)
-        xAxis?.valueFormatter = IndexAxisValueFormatter(day_of_weak)
         xAxis?.position = XAxis.XAxisPosition.BOTTOM
+        xAxis?.labelCount = 7
+        mainbinding?.chart?.notifyDataSetChanged()
+        mainbinding?.chart?.invalidate()
     }
     fun addChart(){
         entry_chart.clear()
@@ -152,15 +159,5 @@ class Diary : Fragment() {
         entry_chart.add(Entry(day-2, 64f))
         entry_chart.add(Entry(day-1, 64f))
         entry_chart.add(Entry(day,weight))
-    }
-    fun addLabel(){
-        day_of_weak.clear()
-        day_of_weak.add("${day.toInt() - 6}일")
-        day_of_weak.add("${day.toInt() - 5}일")
-        day_of_weak.add("${day.toInt() - 4}일")
-        day_of_weak.add("${day.toInt() - 3}일")
-        day_of_weak.add("${day.toInt() - 2}일")
-        day_of_weak.add("${day.toInt() - 1}일")
-        day_of_weak.add("${day.toInt()}일")
     }
 }
