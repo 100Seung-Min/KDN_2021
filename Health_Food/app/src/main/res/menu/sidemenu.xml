@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/side_local"
+        android:title="일반식"/>
+    <item
+        android:id="@+id/side_health"
+        android:title="건강식"/>
+    <item
+        android:id="@+id/side_say"
+        android:title="문의하기"/>
+
+</menu>

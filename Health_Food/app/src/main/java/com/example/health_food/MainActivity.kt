@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1)
         replaceFrgment(MainFragment())
 
+        mbinding.navigation.itemIconTintList = null
         mbinding.navigation.setOnNavigationItemSelectedListener { item ->
             when(item.itemId){
                 R.id.home -> {
@@ -27,10 +28,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.diary -> {
                     replaceFrgment(Diary())
-                    return@setOnNavigationItemSelectedListener true
-                }
-                R.id.eat -> {
-                    replaceFrgment(Eat())
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.search -> {

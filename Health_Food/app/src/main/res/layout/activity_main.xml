@@ -17,16 +17,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.4"/>
+        android:layout_weight="0.1"/>
     <!-- 네비게이션 바 -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.9"
+        android:layout_weight="1.2"
+        app:itemTextColor="#B9E3C7"
+        app:itemIconSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:itemTextColor="@color/white"
-        app:itemIconTint="@color/white"
-        app:menu="@menu/item_navigation">
+        app:menu="@menu/item_navigation"
+        app:labelVisibilityMode="unlabeled"
+        android:background="#B9E3C7">
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 </LinearLayout>

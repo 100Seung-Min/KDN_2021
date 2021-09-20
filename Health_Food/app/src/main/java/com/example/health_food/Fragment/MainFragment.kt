@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Rect
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -36,17 +37,17 @@ class MainFragment : Fragment() {
     ): View? {
         mainbinding = FragmentMainBinding.inflate(inflater, container, false)
 
-        mainbinding?.profileImg?.setOnClickListener {
-            if(ContextCompat.checkSelfPermission(activity!!,android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                val photoPick = Intent(Intent.ACTION_PICK)
-                photoPick.type = "image/*"
-                activity!!.startActivityForResult(photoPick, PiCK_PROFILE_FROM_ALBUM)
-            }
-        }
-        mainbinding?.recommendRecyclerview?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        mainbinding?.recommendRecyclerview?.adapter = RecommendRecyclerViewAdapter()
-        mainbinding?.recommendRecyclerview?.animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_to_left)
-        PagerSnapHelper().attachToRecyclerView(mainbinding?.recommendRecyclerview)
+//        mainbinding?.profileImg?.setOnClickListener {
+//            if(ContextCompat.checkSelfPermission(activity!!,android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+//                val photoPick = Intent(Intent.ACTION_PICK)
+//                photoPick.type = "image/*"
+//                activity!!.startActivityForResult(photoPick, PiCK_PROFILE_FROM_ALBUM)
+//            }
+//        }
+//        mainbinding?.recommendRecyclerview?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+//        mainbinding?.recommendRecyclerview?.adapter = RecommendRecyclerViewAdapter()
+//        mainbinding?.recommendRecyclerview?.animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_to_left)
+//        PagerSnapHelper().attachToRecyclerView(mainbinding?.recommendRecyclerview)
 //        mainbinding?.recommendRecyclerview?.addItemDecoration(HorizontalItemDecorator(80))
         return mainbinding!!.root
     }
@@ -99,8 +100,7 @@ class MainFragment : Fragment() {
     }
     inner class CustomViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
 
-    inner class HorizontalItemDecorator(private val divHeight: Int):
-            RecyclerView.ItemDecoration() {
+    inner class HorizontalItemDecorator(private val divHeight: Int): RecyclerView.ItemDecoration() {
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
             super.getItemOffsets(outRect, view, parent, state)
             outRect.left=divHeight
