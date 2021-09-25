@@ -9,7 +9,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.health_food.Fragment.ChoseFood
 import com.example.health_food.Fragment.Explain
-import com.example.health_food.Fragment.Login
 import com.example.health_food.databinding.ActivityStartBinding
 
 class StartActivity : AppCompatActivity() {
@@ -23,23 +22,22 @@ class StartActivity : AppCompatActivity() {
         mbinding?.startView?.adapter = adapter
         mbinding?.skip?.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 
     inner class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle):FragmentStateAdapter(fragmentManager, lifecycle){
         override fun getItemCount(): Int {
-            return 3
+            return 2
         }
 
         override fun createFragment(position: Int): Fragment {
             return when(position){
                 0 -> {
-                    Login()
+                    Explain()
+
                 }
                 1-> {
-                    Explain()
-                }
-                2 -> {
                     ChoseFood()
                 }
                 else -> {

@@ -17,7 +17,6 @@
         android:layout_weight="3"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:background="@drawable/conner_eat"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,7 +48,6 @@
             android:id="@+id/today_kacl"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:background="@drawable/conner_user"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:text="0000kacl"
@@ -66,8 +64,7 @@
         android:layout_weight="3"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:orientation="vertical"
-        android:background="@drawable/conner_eat">
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -112,7 +109,6 @@
             android:layout_marginEnd="50dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:background="@drawable/conner_user"
             android:text="제출"/>
     </LinearLayout>
     <LinearLayout
@@ -125,8 +121,7 @@
         android:layout_weight="3"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:orientation="vertical"
-        android:background="@drawable/conner_eat">
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -171,7 +166,6 @@
             android:layout_marginEnd="50dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:background="@drawable/conner_user"
             android:text="제출"/>
     </LinearLayout>
     <LinearLayout
@@ -184,8 +178,7 @@
         android:layout_weight="3"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:orientation="vertical"
-        android:background="@drawable/conner_eat">
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -230,7 +223,6 @@
             android:layout_marginEnd="50dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:background="@drawable/conner_user"
             android:text="제출"/>
     </LinearLayout>
 </LinearLayout>

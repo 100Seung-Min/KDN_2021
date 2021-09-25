@@ -12,10 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Health_Food">
-        <activity android:name=".Complain"></activity>
+        <activity android:name=".Complain"/>
         <activity android:name=".FoodDtail" />
         <activity android:name=".MainActivity" />
         <activity android:name=".StartActivity" />
+        <activity android:name=".Login"/>
         <activity
             android:name=".Splash"
             android:screenOrientation="sensorPortrait">

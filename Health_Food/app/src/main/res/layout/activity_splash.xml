@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/box_inset_layout_padding"
-    android:background="#B4CB33"
+    android:background="#B9E3C7"
     tools:context=".Splash"
     android:gravity="center">
 
