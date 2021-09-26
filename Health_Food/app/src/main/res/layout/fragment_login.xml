@@ -64,6 +64,7 @@
             android:layout_gravity="center_vertical"
             android:background="@color/black"/>
         <TextView
+            android:id="@+id/sign_up"
             android:layout_width="90dp"
             android:layout_height="match_parent"
             android:text="회원가입"
