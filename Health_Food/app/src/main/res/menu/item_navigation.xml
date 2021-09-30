@@ -11,13 +11,8 @@
         android:icon="@drawable/home"
         android:title="홈"/>
     <item
-        android:id="@+id/diary"
-        android:enabled="true"
-        android:icon="@drawable/calender"
-        android:title="캘린더"/>
-    <item
         android:id="@+id/userprofile"
         android:enabled="true"
         android:icon="@drawable/calender"
-        android:title="프로필"/>
+        android:title="커뮤니티"/>
 </menu>
