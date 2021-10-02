@@ -37,19 +37,14 @@ class MainActivity : AppCompatActivity() {
                     replaceFrgment(MainFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.diary -> {
+                R.id.comunity -> {
                     mbinding.sideNav.visibility = View.GONE
-                    replaceFrgment(Diary())
+                    replaceFrgment(Comunity())
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.search -> {
                     mbinding.sideNav.visibility = View.GONE
                     replaceFrgment(Search())
-                    return@setOnNavigationItemSelectedListener true
-                }
-                R.id.userprofile -> {
-                    mbinding.sideNav.visibility = View.GONE
-                    replaceFrgment(UserProfile())
                     return@setOnNavigationItemSelectedListener true
                 }
                 else -> {
