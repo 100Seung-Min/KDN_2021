@@ -1,60 +1,77 @@
 package com.example.health_food.Fragment
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.example.health_food.MainActivity
 import com.example.health_food.R
+import com.example.health_food.databinding.FragmentUserProfileBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [UserProfile.newInstance] factory method to
- * create an instance of this fragment.
- */
 class UserProfile : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var binding: FragmentUserProfileBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_profile, container, false)
-    }
+        binding = FragmentUserProfileBinding.inflate(inflater, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment UserProfile.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            UserProfile().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        var local_mode = arguments?.getString("local_mode")
+        var health_mode = arguments?.getString("health_mode")
+        if(local_mode == "on" && health_mode == "on"){
+            binding?.localOn?.setTextColor(Color.parseColor("#00FF29"))
+            binding?.healthOn?.setTextColor(Color.parseColor("#00FF29"))
+        }
+        else if(local_mode == "on"){
+            binding?.localOn?.setTextColor(Color.parseColor("#00FF29"))
+        }
+        else{
+            binding?.healthOn?.setTextColor(Color.parseColor("#00FF29"))
+        }
+        println("여기" + local_mode + health_mode)
+
+        binding?.localChose?.setOnClickListener{
+            if(local_mode == "on" && health_mode == "off"){
+                Toast.makeText(activity, "두개 다 off할 수 없습니다.", Toast.LENGTH_SHORT).show()
             }
+            else if(local_mode == "off"){
+                binding?.localOn?.setTextColor(Color.parseColor("#00FF29"))
+                local_mode = "on"
+            }
+            else{
+                binding?.localOn?.setTextColor(Color.parseColor("#000000"))
+                local_mode = "off"
+            }
+        }
+        binding?.healthChose?.setOnClickListener{
+            if(local_mode == "off" && health_mode == "on"){
+                Toast.makeText(activity, "두개 다 off할 수 없습니다.", Toast.LENGTH_SHORT).show()
+            }
+            else if(health_mode == "off"){
+                binding?.healthOn?.setTextColor(Color.parseColor("#00FF29"))
+                health_mode = "on"
+            }
+            else{
+                binding?.healthOn?.setTextColor(Color.parseColor("#000000"))
+                health_mode = "off"
+            }
+        }
+
+        binding?.saveProfile?.setOnClickListener {
+            val intent = Intent(activity, MainActivity::class.java)
+            intent.putExtra("local_mode", local_mode)
+            intent.putExtra("health_mode", health_mode)
+            startActivity(intent)
+        }
+        return binding!!.root
     }
 }

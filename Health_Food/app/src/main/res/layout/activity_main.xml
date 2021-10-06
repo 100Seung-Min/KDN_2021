@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,7 +8,6 @@
     android:background="@color/white"
     tools:context=".MainActivity">
     <androidx.appcompat.widget.Toolbar
-        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/side_nav"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -19,7 +18,6 @@
         android:orientation="vertical"
         android:weightSum="15">
         <FrameLayout
-            app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/frame_1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -28,14 +26,13 @@
         <!-- 네비게이션 바 -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation"
-            app:labelVisibilityMode="labeled"
+            app:labelVisibilityMode="unlabeled"
             app:itemTextColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/item_navigation"
             android:background="#B9E3C7">
         </com.google.android.material.bottomnavigation.BottomNavigationView>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -18,7 +18,7 @@ class Login: AppCompatActivity() {
                 Toast.makeText(this, "두개 다 입력해주세요", Toast.LENGTH_SHORT).show()
             }
             else {
-                startActivity(Intent(this, StartActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
         }
