@@ -37,8 +37,6 @@ class UserProfile : Fragment() {
         else{
             binding?.healthOn?.setTextColor(Color.parseColor("#00FF29"))
         }
-        println("여기" + local_mode + health_mode)
-
         binding?.localChose?.setOnClickListener{
             if(local_mode == "on" && health_mode == "off"){
                 Toast.makeText(activity, "두개 다 off할 수 없습니다.", Toast.LENGTH_SHORT).show()

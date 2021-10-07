@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.health_food.Fragment.*
 import com.example.health_food.databinding.ActivityMainBinding
+import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
     val mbinding by lazy { ActivityMainBinding.inflate(layoutInflater)}
@@ -22,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     var local_mode: String? = ""
     var health_mode: String? = ""
 
+    var tabLayout: TabLayout? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mbinding.root)
@@ -30,6 +33,10 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar = mbinding.sideNav
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_search_24)
+
+        tabLayout = findViewById(R.id.tab_layout)
 
         local_mode = intent.getStringExtra("local_mode")
         health_mode = intent.getStringExtra("health_mode")
@@ -52,19 +59,19 @@ class MainActivity : AppCompatActivity() {
             when(item.itemId) {
                 R.id.home -> {
                     mbinding.sideNav.visibility = View.VISIBLE
-                    mbinding.tabLayout.visibility = View.VISIBLE
+                    tabLayout?.visibility = View.VISIBLE
                     replaceFrgment(MainFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.comunity -> {
                     mbinding.sideNav.visibility = View.VISIBLE
-                    mbinding.tabLayout.visibility = View.GONE
+                    tabLayout?.visibility = View.GONE
                     replaceFrgment(Comunity())
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.search -> {
                     mbinding.sideNav.visibility = View.GONE
-                    mbinding.tabLayout.visibility = View.GONE
+                    tabLayout?.visibility = View.GONE
                     replaceFrgment(Refrigerator())
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -91,13 +98,18 @@ class MainActivity : AppCompatActivity() {
         when(item.itemId){
             R.id.profile -> {
                 mbinding.sideNav.visibility = View.GONE
-                mbinding.tabLayout.visibility = View.GONE
+                tabLayout?.visibility = View.GONE
                 val userProfile = UserProfile()
                 val bundle = Bundle()
                 bundle.putString("local_mode", local_mode)
                 bundle.putString("health_mode", health_mode)
                 userProfile.arguments = bundle
                 replaceFrgment(userProfile)
+            }
+            android.R.id.home -> {
+                mbinding.sideNav.visibility = View.GONE
+                tabLayout?.visibility = View.GONE
+                replaceFrgment(Search())
             }
         }
         return true

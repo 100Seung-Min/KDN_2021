@@ -43,7 +43,6 @@ class Search : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val text = view?.findViewById<EditText>(R.id.search_food_edit)?.text.toString()
                 search(text)
-                Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
             }
         })
         return view
