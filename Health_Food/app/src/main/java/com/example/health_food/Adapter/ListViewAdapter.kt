@@ -1,5 +1,6 @@
 package com.example.health_food.Adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +10,9 @@ import com.example.health_food.R
 import com.example.health_food.model.Food
 
 class ListViewAdapter(val food: ArrayList<Food>): BaseAdapter(){
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view: View = LayoutInflater.from().inflate(R.layout.item_food, null)
+        val view: View = LayoutInflater.from(parent!!.context).inflate(R.layout.item_food, null)
         val foodItem = view.findViewById<TextView>(R.id.item_food_txt)
         val foodname = food[position].fooditem
         foodItem.text = foodname

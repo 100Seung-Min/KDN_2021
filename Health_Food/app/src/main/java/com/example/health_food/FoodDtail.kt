@@ -2,8 +2,10 @@ package com.example.health_food
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.health_food.Adapter.SliderAdapter
 import com.example.health_food.databinding.ActivityFoodDtailBinding
 import com.example.health_food.databinding.ActivityMainBinding
 import com.example.health_food.model.RecommendDTO
@@ -20,6 +22,7 @@ class FoodDtail : AppCompatActivity() {
     val mainbinding by lazy { ActivityFoodDtailBinding.inflate(layoutInflater)}
     var imgurl:String? = null
     var foodname:String? = null
+    var dots:Array<TextView>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +36,14 @@ class FoodDtail : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
+        mainbinding.viewPager.adapter = SliderAdapter()
+        Indicator()
         mainbinding.dtailFoodName.text = foodname
+    }
+
+    inner class Indicator {
+        for(i in 0..10){
+
+        }
     }
 }
