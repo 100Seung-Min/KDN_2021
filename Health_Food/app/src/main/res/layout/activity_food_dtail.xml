@@ -59,10 +59,10 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="280dp"
         android:layout_marginTop="65dp"/>
     <LinearLayout
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dot_pager"

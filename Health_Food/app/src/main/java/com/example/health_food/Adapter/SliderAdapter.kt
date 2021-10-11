@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import com.example.health_food.R
 
-class SliderAdapter(): PagerAdapter() {
+class SliderAdapter(val list:Array<String>): PagerAdapter() {
     private var mContext: Context?=null
 
     fun ViewPagerAdapter(context: Context){
@@ -26,7 +26,7 @@ class SliderAdapter(): PagerAdapter() {
     }
 
     override fun getCount(): Int {
-        return 5
+        return list.size
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
