@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import com.example.health_food.R
@@ -17,6 +18,8 @@ class SliderAdapter(val list:Array<String>): PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view=LayoutInflater.from(container.context).inflate(R.layout.item_slide, container, false)
+        view.findViewById<TextView>(R.id.recipe_older).text = (position + 1).toString()
+        view.findViewById<TextView>(R.id.recipe_txt).text = list[position]
         container.addView(view)
         return view
     }

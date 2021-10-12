@@ -26,5 +26,9 @@ class Login: AppCompatActivity() {
             startActivity(Intent(this, SignUp::class.java))
             finish()
         }
+        binding.findPassword.setOnClickListener {
+            startActivity(Intent(this, Findpassword::class.java))
+            finish()
+        }
     }
 }

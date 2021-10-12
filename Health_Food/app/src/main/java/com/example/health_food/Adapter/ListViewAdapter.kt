@@ -13,9 +13,8 @@ class ListViewAdapter(val food: ArrayList<Food>): BaseAdapter(){
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(parent!!.context).inflate(R.layout.item_food, null)
-        val foodItem = view.findViewById<TextView>(R.id.item_food_txt)
-        val foodname = food[position].fooditem
-        foodItem.text = foodname
+        val foodtext = view.findViewById<TextView>(R.id.item_food_txt)
+        foodtext.text = food[position].fooditem
         return view
     }
 

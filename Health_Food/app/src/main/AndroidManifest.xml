@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Health_Food">
-        <activity android:name=".SignUp"></activity>
+        <activity android:name=".Findpassword"></activity>
+        <activity android:name=".SignUp" />
         <activity android:name=".Complain" />
         <activity android:name=".FoodDtail" />
         <activity android:name=".MainActivity" />

@@ -21,6 +21,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
        <com.google.android.material.textfield.TextInputEditText
+           android:textColor="@color/black"
+           android:textColorHint="@color/black"
            android:id="@+id/email_edit"
            android:layout_width="250dp"
            android:layout_height="50dp"
@@ -35,6 +37,8 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="#80FFFFFF"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
             android:paddingStart="10dp"
             android:hint="비밀번호 입력"/>
         <Button
@@ -44,6 +48,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@color/white"
+            android:textColor="@color/black"
             android:text="로그인"/>
     </LinearLayout>
     <LinearLayout
@@ -53,6 +58,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center">
         <TextView
+            android:id="@+id/find_password"
             android:layout_width="110dp"
             android:layout_height="match_parent"
             android:text="비밀번호 찾기"

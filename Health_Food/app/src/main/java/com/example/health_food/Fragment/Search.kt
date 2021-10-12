@@ -9,9 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.recyclerview.widget.RecyclerView
 import com.example.health_food.Adapter.ListViewAdapter
 import com.example.health_food.R
 import com.example.health_food.model.Food
+import org.w3c.dom.Text
 
 class Search : Fragment() {
     val foodsearch: ArrayList<Food> = ArrayList()
@@ -24,17 +26,16 @@ class Search : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
-        foodsearch.add(Food(fooditem = "채수빈"))
-        foodsearch.add(Food(fooditem = "민도현"))
-        foodsearch.add(Food(fooditem = "아이유"))
-        foodsearch.add(Food(fooditem = "오종진"))
-        foodsearch.add(Food(fooditem = "조현서"))
-        foodsearch.add(Food(fooditem = "백승민"))
-        foodsearch.add(Food(fooditem = "김성길"))
-        foodsearch.add(Food(fooditem = "김동현"))
+        initlist()
         foodlist.addAll(foodsearch)
         listviewadapter = ListViewAdapter(foodsearch)
         view?.findViewById<ListView>(R.id.search_food_list)?.adapter = listviewadapter
+        view?.findViewById<ListView>(R.id.search_food_list)?.setOnItemClickListener(object : AdapterView.OnItemClickListener{
+            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                view?.findViewById<RecyclerView>(R.id.select_item)?.visibility = View.GONE
+                println("여기")
+            }
+        })
         view?.findViewById<EditText>(R.id.search_food_edit)?.addTextChangedListener (object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -61,5 +62,23 @@ class Search : Fragment() {
             }
         }
         listviewadapter.notifyDataSetChanged()
+    }
+    fun initlist(){
+        foodsearch.add(Food(fooditem = "채수빈"))
+        foodsearch.add(Food(fooditem = "민도현"))
+        foodsearch.add(Food(fooditem = "아이유"))
+        foodsearch.add(Food(fooditem = "오종진"))
+        foodsearch.add(Food(fooditem = "조현서"))
+        foodsearch.add(Food(fooditem = "백승민"))
+        foodsearch.add(Food(fooditem = "김성길"))
+        foodsearch.add(Food(fooditem = "김동현"))
+        foodsearch.add(Food(fooditem = "안진형"))
+        foodsearch.add(Food(fooditem = "선민재"))
+        foodsearch.add(Food(fooditem = "박영재"))
+        foodsearch.add(Food(fooditem = "홍세현"))
+        foodsearch.add(Food(fooditem = "전승원"))
+        foodsearch.add(Food(fooditem = "김형록"))
+        foodsearch.add(Food(fooditem = "김준"))
+        foodsearch.add(Food(fooditem = "이준"))
     }
 }

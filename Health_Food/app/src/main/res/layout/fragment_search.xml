@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.Search"
     android:orientation="vertical">
 
@@ -14,32 +15,52 @@
         android:textSize="30sp"
         android:layout_marginTop="50dp"/>
 
-    <LinearLayout
-        android:layout_marginTop="30dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#B9E3C7"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            android:id="@+id/search_food_edit"
-            android:maxLines="1"
-            android:layout_gravity="center"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:paddingStart="20dp"
-            android:hint="검색"/>
-        <ListView
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:id="@+id/search_food_list"
+        <LinearLayout
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="#999999"
-            android:dividerHeight="0dp"/>
-    </LinearLayout>
+            android:background="#B9E3C7"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:id="@+id/search_food_edit"
+                android:maxLines="1"
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:hint="검색"/>
+            <ListView
+                android:paddingTop="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:layout_marginStart="20dp"
+                android:paddingStart="43dp"
+                android:layout_marginEnd="20dp"
+                android:id="@+id/search_food_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="#999999"
+                android:dividerHeight="0dp"/>
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/select_item"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="80dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:background="@color/black"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
