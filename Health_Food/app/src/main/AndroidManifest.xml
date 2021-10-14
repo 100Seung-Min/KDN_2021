@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".KakaoAplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_foreground"
         android:label="@string/app_name"
@@ -14,17 +15,22 @@
         android:theme="@style/Theme.Health_Food">
         <activity android:name=".Findpassword"></activity>
         <activity android:name=".SignUp" />
-        <activity android:name=".Complain" />
         <activity android:name=".FoodDtail" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".StartActivity" />
-        <activity android:name=".Login" />
+        <activity android:name=".Login">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="oauth"
+                    android:scheme="kakao66dd2107e67e67301fe91d09b6257ce5" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Splash"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

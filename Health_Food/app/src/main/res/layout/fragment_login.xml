@@ -91,10 +91,12 @@
         android:orientation="horizontal"
         android:layout_gravity="center">
         <ImageView
+            android:id="@+id/kakao_login_btn"
             android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:src="@drawable/kakao"/>
         <ImageView
+            android:id="@+id/facebook_login_btn"
             android:layout_marginStart="30dp"
             android:layout_width="35dp"
             android:layout_height="wrap_content"
