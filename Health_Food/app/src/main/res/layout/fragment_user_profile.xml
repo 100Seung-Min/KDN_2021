@@ -15,10 +15,23 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:src="@drawable/ic_baseline_account_circle_24"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/logout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="7dp"
+            android:text="로그아웃"
+            android:background="#B9E3C7"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout

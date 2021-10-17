@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.health_food.Login
 import com.example.health_food.MainActivity
 import com.example.health_food.R
 import com.example.health_food.databinding.FragmentUserProfileBinding
+import com.kakao.sdk.user.UserApiClient
 
 class UserProfile : Fragment() {
     private var binding: FragmentUserProfileBinding? = null
@@ -69,6 +71,11 @@ class UserProfile : Fragment() {
             intent.putExtra("local_mode", local_mode)
             intent.putExtra("health_mode", health_mode)
             startActivity(intent)
+        }
+        binding?.logoutBtn?.setOnClickListener {
+            UserApiClient.instance.logout {
+                startActivity(Intent(context, Login::class.java))
+            }
         }
         return binding!!.root
     }
