@@ -9,4 +9,5 @@
     -->
     <string name="hello_world">Hello Square World!</string>
     <string name="title_activity_start">StartActivity</string>
+    <string name="title_activity_splash">Splash</string>
 </resources>
