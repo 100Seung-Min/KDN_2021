@@ -47,7 +47,6 @@ class FoodDtail : AppCompatActivity() {
         mainbinding.dtailFoodName.text = foodname
         mainbinding.viewPager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
             }
 
             override fun onPageSelected(position: Int) {
@@ -55,9 +54,7 @@ class FoodDtail : AppCompatActivity() {
             }
 
             override fun onPageScrollStateChanged(state: Int) {
-
             }
-
         })
     }
 

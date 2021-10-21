@@ -70,13 +70,13 @@ class UserProfile : Fragment() {
             val intent = Intent(activity, MainActivity::class.java)
             intent.putExtra("local_mode", local_mode)
             intent.putExtra("health_mode", health_mode)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
             startActivity(intent)
         }
         binding?.logoutBtn?.setOnClickListener {
             UserApiClient.instance.logout {
                 val intent = Intent(activity, Login::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
                 startActivity(intent)
             }
         }

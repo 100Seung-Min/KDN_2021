@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/refrigerator_img"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
+        android:layout_height="100dp"
+        android:src="@drawable/unknown"/>
+    <TextView
+        android:id="@+id/refrigerator_txt"
+        android:layout_marginTop="25dp"
+        android:layout_width="150dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_height="25dp"
+        android:text="재료이름"
+        android:textSize="15sp"
+        android:background="@color/black"
+        android:textColor="@color/white"/>
+
+</LinearLayout>
