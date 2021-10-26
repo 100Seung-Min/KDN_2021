@@ -55,7 +55,6 @@ class MainFragment : Fragment() {
         mainbinding?.dinnerThird?.setOnClickListener {
             intent_fooddtail(recommendDTO[8])
         }
-
         return mainbinding!!.root
     }
 
