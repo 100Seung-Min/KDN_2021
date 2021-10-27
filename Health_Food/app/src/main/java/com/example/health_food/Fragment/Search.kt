@@ -18,6 +18,8 @@ import org.w3c.dom.Text
 class Search : Fragment() {
     val foodsearch: ArrayList<Food> = ArrayList()
     var foodlist:ArrayList<Food> = ArrayList()
+    var select_food:ArrayList<String> = ArrayList()
+    lateinit var viewitem: View
     lateinit var listviewadapter:ListViewAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,29 +27,31 @@ class Search : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_search, container, false)
+        viewitem = inflater.inflate(R.layout.fragment_search, container, false)
         initlist()
         foodlist.addAll(foodsearch)
         listviewadapter = ListViewAdapter(foodsearch)
-        view?.findViewById<ListView>(R.id.search_food_list)?.adapter = listviewadapter
-        view?.findViewById<ListView>(R.id.search_food_list)?.setOnItemClickListener(object : AdapterView.OnItemClickListener{
-            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                view?.findViewById<RecyclerView>(R.id.select_item)?.visibility = View.GONE
-                println("여기")
+        viewitem?.findViewById<ListView>(R.id.search_food_list)?.adapter = listviewadapter
+        viewitem?.findViewById<ListView>(R.id.search_food_list)?.setOnItemClickListener { parent, view, position, id ->
+            select_food.add(foodsearch[position].fooditem)
+            if(select_food.size != 0){
+                Toast.makeText(activity, "${foodsearch[position].fooditem}", Toast.LENGTH_SHORT).show()
+                println(select_food[0] + "여기")
+                viewitem?.findViewById<RecyclerView>(R.id.select_item)?.visibility = View.VISIBLE
             }
-        })
-        view?.findViewById<EditText>(R.id.search_food_edit)?.addTextChangedListener (object : TextWatcher {
+        }
+        viewitem?.findViewById<EditText>(R.id.search_food_edit)?.addTextChangedListener (object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun afterTextChanged(s: Editable?) {
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val text = view?.findViewById<EditText>(R.id.search_food_edit)?.text.toString()
+                val text = viewitem?.findViewById<EditText>(R.id.search_food_edit)?.text.toString()
                 search(text)
             }
         })
-        return view
+        return viewitem
     }
     private fun search(text:String){
         foodsearch.clear()

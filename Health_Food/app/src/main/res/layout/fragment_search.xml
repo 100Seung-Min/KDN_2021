@@ -56,8 +56,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/select_item"
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="80dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
