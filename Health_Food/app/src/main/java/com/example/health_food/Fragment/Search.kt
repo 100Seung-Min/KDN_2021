@@ -9,18 +9,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.health_food.Adapter.ListViewAdapter
+import com.example.health_food.Adapter.RecyclerViewAdapter2
 import com.example.health_food.R
 import com.example.health_food.model.Food
 import org.w3c.dom.Text
 
 class Search : Fragment() {
-    val foodsearch: ArrayList<Food> = ArrayList()
+    var foodsearch: ArrayList<Food> = ArrayList()
     var foodlist:ArrayList<Food> = ArrayList()
     var select_food:ArrayList<String> = ArrayList()
     lateinit var viewitem: View
     lateinit var listviewadapter:ListViewAdapter
+    lateinit var selectadapter: RecyclerViewAdapter2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -36,8 +40,8 @@ class Search : Fragment() {
             select_food.add(foodsearch[position].fooditem)
             if(select_food.size != 0){
                 Toast.makeText(activity, "${foodsearch[position].fooditem}", Toast.LENGTH_SHORT).show()
-                println(select_food[0] + "여기")
                 viewitem?.findViewById<RecyclerView>(R.id.select_item)?.visibility = View.VISIBLE
+                select_recyclerview()
             }
         }
         viewitem?.findViewById<EditText>(R.id.search_food_edit)?.addTextChangedListener (object : TextWatcher {
@@ -67,7 +71,7 @@ class Search : Fragment() {
         }
         listviewadapter.notifyDataSetChanged()
     }
-    fun initlist(){
+    private fun initlist(){
         foodsearch.add(Food(fooditem = "채수빈"))
         foodsearch.add(Food(fooditem = "민도현"))
         foodsearch.add(Food(fooditem = "아이유"))
@@ -84,5 +88,10 @@ class Search : Fragment() {
         foodsearch.add(Food(fooditem = "김형록"))
         foodsearch.add(Food(fooditem = "김준"))
         foodsearch.add(Food(fooditem = "이준"))
+    }
+    private fun select_recyclerview(){
+        selectadapter = RecyclerViewAdapter2(select_food, context!!)
+        viewitem.findViewById<RecyclerView>(R.id.select_item).adapter = selectadapter
+        viewitem.findViewById<RecyclerView>(R.id.select_item).layoutManager = GridLayoutManager(context, 3)
     }
 }
