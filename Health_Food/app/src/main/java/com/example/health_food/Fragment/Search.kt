@@ -90,7 +90,7 @@ class Search : Fragment() {
         foodsearch.add(Food(fooditem = "이준"))
     }
     private fun select_recyclerview(){
-        selectadapter = RecyclerViewAdapter2(select_food, context!!)
+        selectadapter = RecyclerViewAdapter2(select_food)
         viewitem.findViewById<RecyclerView>(R.id.select_item).adapter = selectadapter
         viewitem.findViewById<RecyclerView>(R.id.select_item).layoutManager = GridLayoutManager(context, 3)
     }
