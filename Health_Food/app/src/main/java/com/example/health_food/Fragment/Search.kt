@@ -37,13 +37,17 @@ class Search : Fragment() {
         listviewadapter = ListViewAdapter(foodsearch)
         viewitem?.findViewById<ListView>(R.id.search_food_list)?.adapter = listviewadapter
         viewitem?.findViewById<ListView>(R.id.search_food_list)?.setOnItemClickListener { parent, view, position, id ->
-            select_food.add(foodsearch[position].fooditem)
+            if(select_food.contains(foodsearch[position].fooditem))
+            else
+                select_food.add(foodsearch[position].fooditem)
             if(select_food.size != 0){
                 Toast.makeText(activity, "${foodsearch[position].fooditem}", Toast.LENGTH_SHORT).show()
                 viewitem?.findViewById<RecyclerView>(R.id.select_item)?.visibility = View.VISIBLE
                 select_recyclerview()
             }
         }
+
+
         viewitem?.findViewById<EditText>(R.id.search_food_edit)?.addTextChangedListener (object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }

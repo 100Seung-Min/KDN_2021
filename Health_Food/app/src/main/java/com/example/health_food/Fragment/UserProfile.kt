@@ -1,5 +1,6 @@
 package com.example.health_food.Fragment
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.health_food.Login
 import com.example.health_food.MainActivity
 import com.example.health_food.R
@@ -80,6 +82,39 @@ class UserProfile : Fragment() {
                 startActivity(intent)
             }
         }
+
+
+        binding?.userNameTxt?.setOnClickListener {
+            binding?.userNameTxt?.visibility = View.GONE
+            binding?.userNameEditTxt?.setText(binding?.userNameTxt!!.text.toString())
+            binding?.userNameEditTxt?.visibility = View.VISIBLE
+        }
+
+
+        binding?.userNameEditTxt?.setOnClickListener {
+            binding?.userNameTxt?.visibility = View.VISIBLE
+            binding?.userNameTxt?.setText(binding?.userNameEditTxt!!.text.toString())
+            binding?.userNameEditTxt?.visibility = View.GONE
+        }
+
+        binding?.userProfileImg?.setOnClickListener {
+            val intent = Intent()
+            intent.setType("image/*")
+            intent.setAction(Intent.ACTION_GET_CONTENT)
+            startActivityForResult(intent, 0)
+        }
+
+
         return binding!!.root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == 0 && resultCode == RESULT_OK){
+            val data = data?.data
+            Glide.with(this)
+                .load(data)
+                .into(binding?.userProfileImg!!)
+        }
     }
 }

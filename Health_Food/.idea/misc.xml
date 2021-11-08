@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/user/Documents/GitHub/KDN_2021/Health_Food/app/src/main/res/layout/activity_findpassword.xml" value="0.13360507246376813" />
+        <entry key="..\:/Users/user/Documents/GitHub/KDN_2021/Health_Food/app/src/main/res/layout/activity_food_dtail.xml" value="0.13360507246376813" />
+        <entry key="..\:/Users/user/Documents/GitHub/KDN_2021/Health_Food/app/src/main/res/layout/activity_sign_up.xml" value="0.13360507246376813" />
+        <entry key="..\:/Users/user/Documents/GitHub/KDN_2021/Health_Food/app/src/main/res/layout/fragment_login.xml" value="0.13360507246376813" />
         <entry key="..\:/Users/user/Documents/GitHub/KDN_2021/Health_Food/app/src/main/res/layout/fragment_search.xml" value="0.10536980749746708" />
+        <entry key="..\:/Users/user/Documents/GitHub/KDN_2021/Health_Food/app/src/main/res/layout/fragment_user_profile.xml" value="0.13360507246376813" />
         <entry key="..\:/Users/user/Documents/GitHub/KDN_2021/Health_Food/app/src/main/res/layout/item_refrigerator.xml" value="0.1" />
-        <entry key="..\:/Users/user/Documents/GitHub/KDN_2021/Health_Food/app/src/main/res/layout/item_refrigerator_text.xml" value="0.8800000000000001" />
+        <entry key="..\:/Users/user/Documents/GitHub/KDN_2021/Health_Food/app/src/main/res/layout/item_refrigerator_text.xml" value="0.4481203007518797" />
         <entry key="..\:/Users/user/Documents/GitHub/KDN_2021/Health_Food/app/src/main/res/layout/item_slide.xml" value="0.1" />
       </map>
     </option>
