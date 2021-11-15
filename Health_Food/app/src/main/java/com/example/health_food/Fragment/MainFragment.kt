@@ -2,7 +2,6 @@ package com.example.health_food.Fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +10,10 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.health_food.FoodDtail
 import com.example.health_food.databinding.FragmentMainBinding
-import com.example.health_food.model.PostResult
 import com.example.health_food.model.RecommendDTO
 import com.example.health_food.retrofit.RetrofitClient
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
 
 class MainFragment : Fragment() {
     private var mainbinding: FragmentMainBinding? = null
@@ -30,18 +27,6 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        RetrofitClient.api.getPostResult("1").enqueue(object : retrofit2.Callback<PostResult>{
-            override fun onResponse(call: Call<PostResult>, response: Response<PostResult>) {
-                if(response.isSuccessful){
-                    println("여기 ${response.body()}")
-                }
-            }
-
-            override fun onFailure(call: Call<PostResult>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-
-        })
         mainbinding = FragmentMainBinding.inflate(inflater, container, false)
         init_reccomend()
         view_recommend(recommendDTO)

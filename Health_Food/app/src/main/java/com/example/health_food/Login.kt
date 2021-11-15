@@ -8,6 +8,8 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.health_food.databinding.FragmentLoginBinding
+import com.example.health_food.model.Login
+import com.example.health_food.retrofit.RetrofitClient
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -20,7 +22,10 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.common.model.AuthErrorCause.*
 import com.kakao.sdk.user.UserApiClient
+import retrofit2.Call
+import retrofit2.Response
 import java.util.*
+import kotlin.math.log
 
 class Login: AppCompatActivity() {
 
@@ -45,10 +50,26 @@ class Login: AppCompatActivity() {
             }
         }
         binding.loginBtn.setOnClickListener {
+            val login = 0
             if(binding.emailEdit.text!!.isNullOrEmpty() || binding.pwEdit.text!!.isNullOrEmpty()){
                 Toast.makeText(this, "두개 다 입력해주세요", Toast.LENGTH_SHORT).show()
             }
             else {
+                val id = binding.emailEdit.text.toString()
+                val pw = binding.pwEdit.text.toString()
+                RetrofitClient.api.getPostResult(id, pw).enqueue(object : retrofit2.Callback<Login>{
+                    override fun onResponse(call: Call<Login>, response: Response<Login>) {
+                        println("여기")
+                        Log.d("여기", response.body().toString())
+                    }
+
+                    override fun onFailure(call: Call<Login>, t: Throwable) {
+                        println("여기 오류" + t)
+                    }
+
+                })
+            }
+            if(login != 0){
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
