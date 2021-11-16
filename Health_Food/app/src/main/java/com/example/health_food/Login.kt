@@ -50,28 +50,24 @@ class Login: AppCompatActivity() {
             }
         }
         binding.loginBtn.setOnClickListener {
-            val login = 0
             if(binding.emailEdit.text!!.isNullOrEmpty() || binding.pwEdit.text!!.isNullOrEmpty()){
                 Toast.makeText(this, "두개 다 입력해주세요", Toast.LENGTH_SHORT).show()
             }
             else {
                 val id = binding.emailEdit.text.toString()
                 val pw = binding.pwEdit.text.toString()
-                RetrofitClient.api.getPostResult(id, pw).enqueue(object : retrofit2.Callback<Login>{
-                    override fun onResponse(call: Call<Login>, response: Response<Login>) {
-                        println("여기")
-                        Log.d("여기", response.body().toString())
+                RetrofitClient.api.getPostResult(id, pw).enqueue(object : retrofit2.Callback<String>{
+                    override fun onResponse(call: Call<String>, response: Response<String>) {
+                        if(response.body().toString().equals("hi")){
+                            login()
+                        }
                     }
 
-                    override fun onFailure(call: Call<Login>, t: Throwable) {
+                    override fun onFailure(call: Call<String>, t: Throwable) {
                         println("여기 오류" + t)
                     }
 
                 })
-            }
-            if(login != 0){
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
             }
         }
         binding.signUp.setOnClickListener {
@@ -113,5 +109,9 @@ class Login: AppCompatActivity() {
                 finish()
             }
         }
+    }
+    fun login(){
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 }

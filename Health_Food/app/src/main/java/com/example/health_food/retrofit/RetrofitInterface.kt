@@ -4,6 +4,7 @@ import com.example.health_food.model.Login
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface RetrofitInterface {
@@ -12,5 +13,5 @@ interface RetrofitInterface {
     fun getPostResult(
         @Field("userId") id: String,
         @Field("password") password: String
-    ) : Call<Login>
+    ) : Call<String>
 }
