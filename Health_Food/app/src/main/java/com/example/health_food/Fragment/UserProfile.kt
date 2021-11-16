@@ -78,6 +78,7 @@ class UserProfile : Fragment() {
         binding?.logoutBtn?.setOnClickListener {
             UserApiClient.instance.logout {
                 val intent = Intent(activity, Login::class.java)
+                intent.putExtra("login", "logout")
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
                 startActivity(intent)
             }

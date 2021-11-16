@@ -2,39 +2,43 @@ package com.example.health_food
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.health_food.databinding.FragmentLoginBinding
-import com.example.health_food.model.Login
 import com.example.health_food.retrofit.RetrofitClient
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
-import com.facebook.FacebookSdk
-import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.util.Utility
-import com.kakao.sdk.common.model.AuthErrorCause.*
 import com.kakao.sdk.user.UserApiClient
 import retrofit2.Call
 import retrofit2.Response
 import java.util.*
-import kotlin.math.log
 
 class Login: AppCompatActivity() {
 
     val binding by lazy { FragmentLoginBinding.inflate(layoutInflater)}
     var callbackManager: CallbackManager? = null
+    var login: String? = ""
+    var islogout: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        val pref = getSharedPreferences("LOGIN", MODE_PRIVATE)
+        val edit = pref.edit()
+        islogout = intent.getStringExtra("login")
+        if(islogout == "logout"){
+            edit.putString("login", "logout")
+            edit.commit()
+        }
+        login = pref.getString("login", " ")
+        if(login == "login"){
+            login()
+        }
         callbackManager = CallbackManager.Factory.create()
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (token != null) {
@@ -56,9 +60,11 @@ class Login: AppCompatActivity() {
             else {
                 val id = binding.emailEdit.text.toString()
                 val pw = binding.pwEdit.text.toString()
-                RetrofitClient.api.getPostResult(id, pw).enqueue(object : retrofit2.Callback<String>{
+                RetrofitClient.api.postLogin(id, pw).enqueue(object : retrofit2.Callback<String>{
                     override fun onResponse(call: Call<String>, response: Response<String>) {
                         if(response.body().toString().equals("hi")){
+                            edit.putString("login", "login")
+                            edit.commit()
                             login()
                         }
                     }
