@@ -33,4 +33,23 @@ interface RetrofitInterface {
     fun postEmailOverlap(
         @Field("email") email: String
     ) : Call<String>
+
+    @FormUrlEncoded
+    @POST("/getNickname")
+    fun postGetNickName(
+        @Field("userId") id:String
+    ) : Call<String>
+
+    @FormUrlEncoded
+    @POST("/emailAuth")
+    fun postEmailAuth(
+        @Field("userId") id: String
+    ): Call<String>
+
+    @FormUrlEncoded
+    @POST("/pwChange")
+    fun postPwChange(
+        @Field("userId") id: String,
+        @Field("password") pw: String
+    ): Call<String>
 }

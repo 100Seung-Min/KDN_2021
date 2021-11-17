@@ -27,7 +27,9 @@ class SignUp : AppCompatActivity() {
                     if(isIdOverlap == "idfail"){
                         massage("중복된 아이디입니다.")
                     }
-                    else binding.idCheckBtn.visibility = View.GONE
+                    else if(isIdOverlap != ""){
+                        binding.idCheckBtn.visibility = View.GONE
+                    }
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
@@ -37,13 +39,15 @@ class SignUp : AppCompatActivity() {
             })
         }
         binding.emailCheckBtn.setOnClickListener {
-            RetrofitClient.api.postEmailOverlap(binding.emailInput.toString()).enqueue(object : retrofit2.Callback<String>{
+            RetrofitClient.api.postEmailOverlap(binding.emailInput.text.toString()).enqueue(object : retrofit2.Callback<String>{
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     isEmailOverlap = response.body().toString()
                     if(isEmailOverlap == "emailfail"){
                         massage("중복된 이메일입니다.")
                     }
-                    else binding.emailCheckBtn.visibility = View.GONE
+                    else if(isEmailOverlap != ""){
+                        binding.emailCheckBtn.visibility = View.GONE
+                    }
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
@@ -83,7 +87,7 @@ class SignUp : AppCompatActivity() {
         }
     }
     fun signup(){
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, Login::class.java))
         finish()
     }
     fun massage(massage: String){

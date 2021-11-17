@@ -13,7 +13,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.health_food.Fragment.*
 import com.example.health_food.databinding.ActivityMainBinding
+import com.example.health_food.retrofit.RetrofitClient
 import com.google.android.material.tabs.TabLayout
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     val mbinding by lazy { ActivityMainBinding.inflate(layoutInflater)}
@@ -27,11 +31,28 @@ class MainActivity : AppCompatActivity() {
 
     var tabLayout: TabLayout? = null
 
+    var nickname: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mbinding.root)
         replaceFrgment(MainFragment())
         val pref = getSharedPreferences(PREFERENCE, MODE_PRIVATE)
+        val pref_login = getSharedPreferences("LOGIN", MODE_PRIVATE)
+        val id = pref_login.getString("userId", "")
+        println("여기 ${id}")
+        if(id != ""){
+            RetrofitClient.api.postGetNickName(id!!).enqueue(object : Callback<String>{
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    nickname = response.body().toString()
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    println("여기오류 ${t}")
+                }
+
+            })
+        }
 
         val toolbar = mbinding.sideNav
         setSupportActionBar(toolbar)
@@ -105,6 +126,7 @@ class MainActivity : AppCompatActivity() {
                 val bundle = Bundle()
                 bundle.putString("local_mode", local_mode)
                 bundle.putString("health_mode", health_mode)
+                bundle.putString("userName", nickname)
                 userProfile.arguments = bundle
                 replaceFrgment(userProfile)
             }

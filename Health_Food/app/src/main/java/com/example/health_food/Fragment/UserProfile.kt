@@ -31,6 +31,8 @@ class UserProfile : Fragment() {
 
         var local_mode = arguments?.getString("local_mode")
         var health_mode = arguments?.getString("health_mode")
+        var username = arguments?.getString("userName")
+        binding?.userNameTxt?.text = username
         if(local_mode == "on" && health_mode == "on"){
             binding?.localOn?.setTextColor(Color.parseColor("#00FF29"))
             binding?.healthOn?.setTextColor(Color.parseColor("#00FF29"))

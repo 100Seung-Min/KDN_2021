@@ -64,6 +64,7 @@ class Login: AppCompatActivity() {
                     override fun onResponse(call: Call<String>, response: Response<String>) {
                         if(response.body().toString().equals("hi")){
                             edit.putString("login", "login")
+                            edit.putString("userId", "${id}")
                             edit.commit()
                             login()
                         }
