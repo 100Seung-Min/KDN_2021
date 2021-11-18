@@ -74,6 +74,7 @@ class UserProfile : Fragment() {
             val intent = Intent(activity, MainActivity::class.java)
             intent.putExtra("local_mode", local_mode)
             intent.putExtra("health_mode", health_mode)
+            intent.putExtra("user_name", binding?.userNameTxt?.text.toString())
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
             startActivity(intent)
         }

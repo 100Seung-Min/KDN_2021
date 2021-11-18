@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     var tabLayout: TabLayout? = null
 
-    var nickname: String = ""
+    var nickname: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +40,40 @@ class MainActivity : AppCompatActivity() {
         val pref = getSharedPreferences(PREFERENCE, MODE_PRIVATE)
         val pref_login = getSharedPreferences("LOGIN", MODE_PRIVATE)
         val id = pref_login.getString("userId", "")
-        println("여기 ${id}")
+
+        val toolbar = mbinding.sideNav
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_search_24)
+
+        tabLayout = findViewById(R.id.tab_layout)
+
+        local_mode = intent.getStringExtra("local_mode")
+        health_mode = intent.getStringExtra("health_mode")
+        nickname = intent.getStringExtra("user_name")
+
+        if(local_mode == null && health_mode == null){
+            local_mode = pref.getString(LOCAL_MODE, "")
+            health_mode = pref.getString(HEALTH_MODE, "")
+        }
+
+        val editor = pref.edit()
+        editor.putString(LOCAL_MODE, local_mode)
+        editor.putString(HEALTH_MODE, health_mode)
+        editor.commit()
+
+        if(nickname != null){
+            RetrofitClient.api.postNameChange(pref_login.getString("userId", "")!!, nickname!!).enqueue(object : retrofit2.Callback<String>{
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    println("여기 오류 ${t}")
+                }
+
+            })
+        }
+
         if(id != ""){
             RetrofitClient.api.postGetNickName(id!!).enqueue(object : Callback<String>{
                 override fun onResponse(call: Call<String>, response: Response<String>) {
@@ -53,28 +86,6 @@ class MainActivity : AppCompatActivity() {
 
             })
         }
-
-        val toolbar = mbinding.sideNav
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_search_24)
-
-        tabLayout = findViewById(R.id.tab_layout)
-
-        local_mode = intent.getStringExtra("local_mode")
-        health_mode = intent.getStringExtra("health_mode")
-
-        if(local_mode == null && health_mode == null){
-            local_mode = pref.getString(LOCAL_MODE, "")
-            health_mode = pref.getString(HEALTH_MODE, "")
-        }
-
-        val editor = pref.edit()
-        editor.putString(LOCAL_MODE, local_mode)
-        editor.putString(HEALTH_MODE, health_mode)
-        editor.commit()
-
-
 
         mbinding.navigation.itemIconTintList = null
         mbinding.navigation.selectedItemId = R.id.home
@@ -103,6 +114,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        RetrofitClient.api.postIsTasteDiv(pref_login.getString("userId", "")!!, local_mode!!, health_mode!!).enqueue(object : retrofit2.Callback<String>{
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                println("여기 오류 ${t}")
+            }
+
+        })
     }
 
     private fun replaceFrgment(fragment: Fragment){

@@ -57,7 +57,6 @@ class SignUp : AppCompatActivity() {
             })
         }
         binding.signUpBtn.setOnClickListener {
-            println("여기${isIdOverlap} + ${isEmailOverlap}")
             if (binding.emailInput.text!!.isNullOrEmpty() ||
                     binding.idInput.text!!.isNullOrEmpty() ||
                     binding.nickInput.text!!.isNullOrEmpty() ||
@@ -68,6 +67,9 @@ class SignUp : AppCompatActivity() {
             else if(isIdOverlap == "" ||
                 isEmailOverlap == ""){
                 Toast.makeText(this, "중복체크를 해주세요", Toast.LENGTH_SHORT).show()
+            }
+            else if(!binding.emailInput.text.toString().contains("@")){
+                Toast.makeText(this, "이메일 형식이 아닙니다", Toast.LENGTH_SHORT).show()
             }
             else {
                 val email = binding.emailInput.text.toString()

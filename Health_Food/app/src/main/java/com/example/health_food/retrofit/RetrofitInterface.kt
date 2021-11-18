@@ -52,4 +52,19 @@ interface RetrofitInterface {
         @Field("userId") id: String,
         @Field("password") pw: String
     ): Call<String>
+
+    @FormUrlEncoded
+    @POST("/isTasteDiv")
+    fun postIsTasteDiv(
+        @Field("userId") id:String,
+        @Field("local") local: String,
+        @Field("health") health: String
+    ) : Call<String>
+
+    @FormUrlEncoded
+    @POST("/nameChange")
+    fun postNameChange(
+        @Field("userId") id: String,
+        @Field("nickname") username: String
+    ) : Call<String>
 }

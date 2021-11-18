@@ -1,6 +1,5 @@
 package com.example.health_food.Fragment
 
-import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,13 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.health_food.Adapter.RecyclerViewAdapter
 import com.example.health_food.R
 import com.example.health_food.databinding.FragmentRefrigeratorBinding
 import com.example.health_food.model.Refrigerator
-import java.util.zip.Inflater
 
 class Refrigerator : Fragment() {
     private var binding: FragmentRefrigeratorBinding? = null
@@ -33,7 +30,7 @@ class Refrigerator : Fragment() {
                     ?.commit()
         }
         initlist()
-        val adapter = RecyclerViewAdapter(itemlist, context!!)
+        val adapter = RecyclerViewAdapter(itemlist, context)
         binding?.foodRefrigerator?.adapter = adapter
         binding?.foodRefrigerator?.layoutManager = GridLayoutManager(context, 3)
         binding?.foodRefrigerator?.addItemDecoration(HorizontalItemDecorator(30))
