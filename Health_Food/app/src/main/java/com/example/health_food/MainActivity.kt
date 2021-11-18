@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     var tabLayout: TabLayout? = null
 
-    var nickname: String? = ""
+    var nickname: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,7 +83,6 @@ class MainActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<String>, t: Throwable) {
                     println("여기오류 ${t}")
                 }
-
             })
         }
 
