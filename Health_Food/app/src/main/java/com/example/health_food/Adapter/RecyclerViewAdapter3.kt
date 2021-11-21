@@ -3,6 +3,7 @@ package com.example.health_food.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.health_food.R
 import com.example.health_food.model.CommunityDTO
@@ -10,7 +11,9 @@ import com.example.health_food.model.CommunityDTO
 class RecyclerViewAdapter3(val itemlist: ArrayList<CommunityDTO>): RecyclerView.Adapter<RecyclerViewAdapter3.ViewHolder>() {
     class ViewHolder(v: View): RecyclerView.ViewHolder(v) {
         fun bind(item: CommunityDTO){
-
+            itemView.findViewById<TextView>(R.id.user_name_txt).text = item.user_ID
+            itemView.findViewById<TextView>(R.id.detail_txt).text = item.content
+            itemView.findViewById<TextView>(R.id.hashtag_txt).text = "#" + item.tag
         }
     }
 

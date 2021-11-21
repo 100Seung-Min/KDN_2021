@@ -80,5 +80,5 @@ interface RetrofitInterface {
     ) : Call<String>
 
     @GET("/list/1")
-    fun getList(): Call<CommunityDTO>
+    fun getList(): Call<ArrayList<CommunityDTO>>
 }

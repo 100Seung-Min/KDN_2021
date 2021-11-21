@@ -14,4 +14,25 @@
         android:layout_height="400dp"
         android:background="#C4C4C4"/>
 
+    <EditText
+        android:id="@+id/detail_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:hint="문구를 입력해주세요"/>
+    <EditText
+        android:id="@+id/hashtag_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:hint="#키워드를 입력해주세요"/>
+
+    <Button
+        android:id="@+id/upload_btn"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="게시글"
+        android:layout_gravity="center"
+        android:layout_marginTop="150dp"/>
+
 </LinearLayout>

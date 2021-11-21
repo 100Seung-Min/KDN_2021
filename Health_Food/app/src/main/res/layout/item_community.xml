@@ -51,6 +51,7 @@
         android:background="#C4C4C4"/>
 
     <LinearLayout
+        android:id="@+id/detail_bar"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         app:layout_constraintRight_toRightOf="parent"
@@ -63,5 +64,22 @@
             android:layout_width="45dp"
             android:layout_height="match_parent"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/detail_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_bar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/hashtag_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_txt"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="10sp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

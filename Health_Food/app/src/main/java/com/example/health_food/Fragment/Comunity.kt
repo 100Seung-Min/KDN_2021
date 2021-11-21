@@ -12,6 +12,9 @@ import com.example.health_food.AddCommunityImage
 import com.example.health_food.R
 import com.example.health_food.databinding.FragmentComunityBinding
 import com.example.health_food.model.CommunityDTO
+import com.example.health_food.retrofit.RetrofitClient
+import retrofit2.Call
+import retrofit2.Response
 
 class Comunity : Fragment() {
 
@@ -28,13 +31,21 @@ class Comunity : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentComunityBinding.inflate(inflater, container, false)
 
-        itemlist.add(CommunityDTO("hello", "hello", "hello", "hello", "hello"))
-        itemlist.add(CommunityDTO("hello", "hello", "hello", "hello", "hello"))
+        recyclerview()
 
-        val adapter = RecyclerViewAdapter3(itemlist)
+        RetrofitClient.api.getList().enqueue(object : retrofit2.Callback<ArrayList<CommunityDTO>>{
+            override fun onResponse(call: Call<ArrayList<CommunityDTO>>, response: Response<ArrayList<CommunityDTO>>) {
+                for(i in response.body()!!){
+                    itemlist.add(i)
+                    recyclerview()
+                }
+            }
 
-        binding.communityRecyclerview.adapter = adapter
-        binding.communityRecyclerview.layoutManager = LinearLayoutManager(context)
+            override fun onFailure(call: Call<ArrayList<CommunityDTO>>, t: Throwable) {
+                println("여기 오류${t}")
+            }
+
+        })
 
         binding.addCommunityBtn.setOnClickListener {
             val intent = Intent(context, AddCommunityImage::class.java)
@@ -43,5 +54,12 @@ class Comunity : Fragment() {
         }
 
         return binding.root
+    }
+
+    fun recyclerview(){
+        val adapter = RecyclerViewAdapter3(itemlist)
+
+        binding.communityRecyclerview.adapter = adapter
+        binding.communityRecyclerview.layoutManager = LinearLayoutManager(context)
     }
 }
