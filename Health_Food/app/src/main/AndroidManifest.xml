@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.health_food">
+    package="com.example.health_food" >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,30 +13,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Health_Food"
-        android:usesCleartextTraffic="true">
-
-        <activity android:name=".Findpassword"/>
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".AddCommunityImage"
+            android:exported="false" />
+        <activity android:name=".Findpassword" />
         <activity android:name=".SignUp" />
         <activity android:name=".FoodDtail" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Login"/>
+        <activity android:name=".Login" />
         <activity
             android:name=".Splash"
-            android:screenOrientation="sensorPortrait">
+            android:screenOrientation="sensorPortrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:host="oauth"
+
+                <data
+                    android:host="oauth"
                     android:scheme="kakao66dd2107e67e67301fe91d09b6257ce5" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -47,7 +54,7 @@
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -58,4 +65,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

@@ -1,8 +1,10 @@
 package com.example.health_food.retrofit
 
+import com.example.health_food.model.CommunityDTO
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface RetrofitInterface {
@@ -67,4 +69,16 @@ interface RetrofitInterface {
         @Field("userId") id: String,
         @Field("nickname") username: String
     ) : Call<String>
+
+    @FormUrlEncoded
+    @POST("/upload")
+    fun postUpload(
+        @Field("userId") id: String,
+        @Field("picture") picture: String,
+        @Field("tag") tag: String,
+        @Field("content") content: String
+    ) : Call<String>
+
+    @GET("/list/1")
+    fun getList(): Call<CommunityDTO>
 }
