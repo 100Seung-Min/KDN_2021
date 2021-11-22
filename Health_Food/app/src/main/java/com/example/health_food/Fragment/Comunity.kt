@@ -38,6 +38,7 @@ class Comunity : Fragment() {
                 for(i in response.body()!!){
                     itemlist.add(i)
                     recyclerview()
+                    println("여기 ${i}")
                 }
             }
 
@@ -49,7 +50,6 @@ class Comunity : Fragment() {
 
         binding.addCommunityBtn.setOnClickListener {
             val intent = Intent(context, AddCommunityImage::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
             startActivity(intent)
         }
 
@@ -57,7 +57,7 @@ class Comunity : Fragment() {
     }
 
     fun recyclerview(){
-        val adapter = RecyclerViewAdapter3(itemlist)
+        val adapter = RecyclerViewAdapter3(itemlist, context)
 
         binding.communityRecyclerview.adapter = adapter
         binding.communityRecyclerview.layoutManager = LinearLayoutManager(context)

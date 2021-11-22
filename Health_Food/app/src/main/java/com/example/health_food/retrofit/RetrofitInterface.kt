@@ -1,11 +1,10 @@
 package com.example.health_food.retrofit
 
 import com.example.health_food.model.CommunityDTO
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface RetrofitInterface {
     @FormUrlEncoded
@@ -70,15 +69,31 @@ interface RetrofitInterface {
         @Field("nickname") username: String
     ) : Call<String>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("/upload")
     fun postUpload(
-        @Field("userId") id: String,
-        @Field("picture") picture: String,
-        @Field("tag") tag: String,
-        @Field("content") content: String
+        @Part("userId") id: RequestBody,
+        @Part file: MultipartBody.Part,
+        @Part("tag") tag: RequestBody,
+        @Part("content") content: RequestBody
     ) : Call<String>
 
     @GET("/list/1")
     fun getList(): Call<ArrayList<CommunityDTO>>
+
+    @Multipart
+    @POST("/pageUpdate")
+    fun postPageUpdate(
+        @Part("id") id: RequestBody,
+        @Part("userId") userId: RequestBody,
+        @Part file: MultipartBody.Part,
+        @Part ("tag") tag: String,
+        @Part ("content") content: String
+    ): Call<String>
+
+    @FormUrlEncoded
+    @POST("/pageDelete")
+    fun postPageDelete(
+        @Field("id") id: String
+    ): Call<String>
 }
