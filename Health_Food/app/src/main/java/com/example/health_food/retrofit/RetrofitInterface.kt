@@ -1,6 +1,6 @@
 package com.example.health_food.retrofit
 
-import com.example.health_food.model.CommunityDTO
+import com.example.health_food.model.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -39,7 +39,7 @@ interface RetrofitInterface {
     @POST("/getNickname")
     fun postGetNickName(
         @Field("userId") id:String
-    ) : Call<String>
+    ) : Call<ArrayList<User>>
 
     @FormUrlEncoded
     @POST("/emailAuth")
@@ -75,7 +75,8 @@ interface RetrofitInterface {
         @Part("userId") id: RequestBody,
         @Part file: MultipartBody.Part,
         @Part("tag") tag: RequestBody,
-        @Part("content") content: RequestBody
+        @Part("content") content: RequestBody,
+        @Part ("url") url: RequestBody
     ) : Call<String>
 
     @GET("/list/1")
@@ -87,8 +88,9 @@ interface RetrofitInterface {
         @Part("id") id: RequestBody,
         @Part("userId") userId: RequestBody,
         @Part file: MultipartBody.Part,
-        @Part ("tag") tag: String,
-        @Part ("content") content: String
+        @Part ("tag") tag: RequestBody,
+        @Part ("content") content: RequestBody,
+        @Part ("url") url: RequestBody
     ): Call<String>
 
     @FormUrlEncoded
@@ -96,4 +98,77 @@ interface RetrofitInterface {
     fun postPageDelete(
         @Field("id") id: String
     ): Call<String>
+
+    @FormUrlEncoded
+    @POST("/pageOneList")
+    fun postPageOneList(
+        @Field("id") id: String
+    ): Call<ArrayList<CommunityDTO>>
+
+    @FormUrlEncoded
+    @POST("/vegetableMain")
+    fun getVegetable(
+        @Field("tasteDiv") taste: Int
+    ): Call<ArrayList<RecommendDTO>>
+
+    @FormUrlEncoded
+    @POST("/meatMain")
+    fun getMeat(
+        @Field("tasteDiv") taste: Int
+    ): Call<ArrayList<RecommendDTO>>
+
+    @FormUrlEncoded
+    @POST("/dessertMain")
+    fun getDessert(
+        @Field("tasteDiv") taste: Int
+    ): Call<ArrayList<RecommendDTO>>
+
+    @FormUrlEncoded
+    @POST("/etcMain")
+    fun getEtc(
+        @Field("tasteDiv") taste: Int
+    ): Call<ArrayList<RecommendDTO>>
+
+    @FormUrlEncoded
+    @POST("/ingredientSearch")
+    fun postIngredient(
+        @Field("id") id: String
+    ): Call<ArrayList<String>>
+
+    @FormUrlEncoded
+    @POST("/recipe")
+    fun postRecipe(
+        @Field("id") id: String
+    ) : Call<ArrayList<Recipe>>
+
+    @GET("/ingredientList")
+    fun postIngredientList(): Call<ArrayList<Food>>
+
+    @FormUrlEncoded
+    @POST("/frige")
+    fun postFrige(
+        @Field("userId") id: String,
+        @Field("food") food: ArrayList<Int>
+    ): Call<String>
+
+    @FormUrlEncoded
+    @POST("/userFridge")
+    fun postUserFridge(
+        @Field("userId") id: String
+    ): Call<ArrayList<Refrigerator>>
+
+    @FormUrlEncoded
+    @POST("/ingredientDelete")
+    fun postIngredientDelete(
+        @Field("userId") id: String,
+        @Field("id") foodid: ArrayList<Int>,
+        @Field("ingredient") ingredient: ArrayList<Int>
+    ): Call<String>
+
+    @FormUrlEncoded
+    @POST("/frigeRecipeList")
+    fun postfrigeRecipe(
+        @Field("userId") id: String,
+        @Field("foodChoose") food: ArrayList<Int>
+    ) : Call<ArrayList<FrigeRecipe>>
 }

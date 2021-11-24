@@ -8,16 +8,24 @@
     android:background="@color/white"
     tools:context=".MainActivity">
     <androidx.appcompat.widget.Toolbar
+        android:visibility="visible"
         android:id="@+id/side_nav"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#B9E3C7"/>
+        android:background="#B9E3C7">
+        <ImageView
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/real_logo"
+            android:layout_gravity="center"/>
+    </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="15">
         <com.google.android.material.tabs.TabLayout
+            android:visibility="gone"
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_gravity="center"

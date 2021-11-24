@@ -2,22 +2,32 @@ package com.example.health_food.Fragment
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Color
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.health_food.Login
 import com.example.health_food.MainActivity
 import com.example.health_food.R
 import com.example.health_food.databinding.FragmentUserProfileBinding
 import com.kakao.sdk.user.UserApiClient
+import java.io.File
 
 class UserProfile : Fragment() {
     private var binding: FragmentUserProfileBinding? = null
+
+    var currentUri: Uri? = null
+    var file: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,11 +124,33 @@ class UserProfile : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == 0 && resultCode == RESULT_OK){
-            val data = data?.data
-            Glide.with(this)
-                .load(data)
-                .into(binding?.userProfileImg!!)
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+                currentUri = data?.data
+                file = File(getPathFromUri(currentUri))
+                currentUri?.let {
+                    if (Build.VERSION.SDK_INT < 28) {
+                        val bitmap = MediaStore.Images.Media.getBitmap(
+                            context?.contentResolver,
+                            currentUri
+                        )
+                        binding?.userProfileImg?.setImageBitmap(bitmap)
+                    } else {
+                        val source = ImageDecoder.createSource(context?.contentResolver!!, currentUri!!)
+                        val bitmap = ImageDecoder.decodeBitmap(source)
+                        binding?.userProfileImg?.setImageBitmap(bitmap)
+                    }
+                }
+            } else if (resultCode == AppCompatActivity.RESULT_CANCELED) {
+                Toast.makeText(context, "사진 선택 취소", Toast.LENGTH_LONG).show();
+            }
         }
+    }
+    fun getPathFromUri(uri: Uri?): String? {
+        val cursor: Cursor? = context?.contentResolver?.query(uri!!, null, null, null, null)
+        cursor?.moveToNext()
+        val path: String = cursor!!.getString(cursor!!.getColumnIndex("_data"))
+        cursor.close()
+        return path
     }
 }

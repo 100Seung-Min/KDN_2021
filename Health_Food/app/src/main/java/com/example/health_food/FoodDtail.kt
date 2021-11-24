@@ -10,41 +10,47 @@ import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.example.health_food.Adapter.SliderAdapter
 import com.example.health_food.databinding.ActivityFoodDtailBinding
-import com.example.health_food.databinding.ActivityMainBinding
-import com.example.health_food.model.RecommendDTO
-import com.github.mikephil.charting.animation.Easing
-import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.utils.ColorTemplate
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.health_food.model.Recipe
+import com.example.health_food.retrofit.RetrofitClient
+import retrofit2.Call
+import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FoodDtail : AppCompatActivity() {
 
     val mainbinding by lazy { ActivityFoodDtailBinding.inflate(layoutInflater)}
     var imgurl:String? = null
     var foodname:String? = null
+    var content: String? = null
+    var ingredient: ArrayList<String>? = ArrayList()
     var dots: Array<TextView?> = emptyArray()
-    var list:Array<String> = emptyArray()
+    var list:ArrayList<Recipe>? = ArrayList()
+    var recipeId: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mainbinding!!.root)
-        initlist()
-        dots = arrayOfNulls<TextView>(list!!.size)
-        Indicator()
         imgurl = intent.getStringExtra("imgurl")
         foodname = intent.getStringExtra("foodname")
+        content = intent.getStringExtra("content")
+        recipeId = intent.getStringExtra("recipe-id")
+        ingredient = intent.getStringArrayListExtra("ingredient")
+        callRetrofit()
         Glide.with(this)
-                .load(imgurl)
+                .load("http://192.168.137.1:3000/images/" + imgurl)
                 .into(mainbinding.dtailFoodImg)
+        if(ingredient == null){
+            ingredient = ArrayList()
+        }
+        mainbinding.viewPager.adapter = SliderAdapter(list!!, ingredient!!, imgurl!!)
+        mainbinding.dtailFoodName.text = foodname
         mainbinding.dtailFoodBack.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NO_HISTORY)
+            startActivity(intent)
             finish()
         }
-        mainbinding.viewPager.adapter = SliderAdapter(list)
-        mainbinding.dtailFoodName.text = foodname
         mainbinding.viewPager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
             }
@@ -73,11 +79,6 @@ class FoodDtail : AppCompatActivity() {
         }
     }
 
-    private fun initlist(){
-        list = list?.plus("안녕하세요")
-        list = list?.plus("안녕히가세요")
-    }
-
     private fun dotselect(position: Int){
         for(i in 0..dots.size-1){
             if(i == position){
@@ -87,5 +88,33 @@ class FoodDtail : AppCompatActivity() {
                 dots[i]?.setTextColor(Color.parseColor("#000000"))
             }
         }
+    }
+
+    fun callRetrofit(){
+        RetrofitClient.api.postRecipe(recipeId!!).enqueue(object : retrofit2.Callback<ArrayList<Recipe>>{
+            override fun onResponse(
+                call: Call<ArrayList<Recipe>>,
+                response: Response<ArrayList<Recipe>>
+            ) {
+                for(i in response.body()!!){
+                    list!!.add(i)
+                }
+                draw()
+                dataChanged()
+            }
+
+            override fun onFailure(call: Call<ArrayList<Recipe>>, t: Throwable) {
+                println("여기 오류 ${t}")
+            }
+        })
+    }
+
+    fun draw(){
+        dots = arrayOfNulls<TextView>(list!!.size + 1)
+        Indicator()
+    }
+
+    fun dataChanged(){
+        mainbinding.viewPager.adapter = SliderAdapter(list!!, ingredient!!, imgurl!!)
     }
 }

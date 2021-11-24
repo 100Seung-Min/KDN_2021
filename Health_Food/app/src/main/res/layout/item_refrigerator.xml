@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/refrigerator_layout"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="180dp"
     android:orientation="vertical">
@@ -9,7 +10,7 @@
         android:layout_width="200dp"
         android:layout_gravity="center"
         android:layout_height="100dp"
-        android:src="@drawable/unknown"/>
+        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"/>
     <TextView
         android:id="@+id/refrigerator_txt"
         android:layout_marginTop="25dp"

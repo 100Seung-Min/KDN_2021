@@ -6,5 +6,6 @@ data class CommunityDTO(
     val picture: String,
     val tag: String,
     val content: String,
-    val postDate: String
+    val postDate: String,
+    val url: String
 )

@@ -46,6 +46,7 @@
                 android:background="@color/white"
                 android:layout_marginStart="20dp"
                 android:paddingStart="43dp"
+                android:paddingEnd="8dp"
                 android:layout_marginEnd="20dp"
                 android:id="@+id/search_food_list"
                 android:layout_width="match_parent"
@@ -53,6 +54,15 @@
                 android:divider="#999999"
                 android:dividerHeight="0dp"/>
         </LinearLayout>
+        <Button
+            android:visibility="gone"
+            android:id="@+id/add_material_btn"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="추가하기"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/select_item"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/select_item"
             android:layout_width="match_parent"

@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.health_food.FoodDtail
-import com.example.health_food.R
-import com.example.health_food.databinding.FragmentMainBinding
 import com.example.health_food.databinding.FragmentMainRecommandBinding
+import com.example.health_food.model.Recipe
 import com.example.health_food.model.RecommendDTO
+import com.example.health_food.retrofit.RetrofitClient
+import retrofit2.Call
+import retrofit2.Response
 
 class MainRecommand(var recommendDTO:ArrayList<RecommendDTO>) : Fragment() {
 
@@ -30,32 +32,36 @@ class MainRecommand(var recommendDTO:ArrayList<RecommendDTO>) : Fragment() {
         mainbinding = FragmentMainRecommandBinding.inflate(inflater, container, false)
         view_recommend(recommendDTO)
 
+        mainbinding?.mainRecommand?.setOnClickListener {
+            callRetrofit(recommendDTO[0])
+        }
+
         mainbinding?.breakfastFirst?.setOnClickListener {
-            intent_fooddtail(recommendDTO[0])
+            callRetrofit(recommendDTO[1])
         }
         mainbinding?.breakfastSecond?.setOnClickListener {
-            intent_fooddtail(recommendDTO[1])
+            callRetrofit(recommendDTO[2])
         }
         mainbinding?.breakfastThird?.setOnClickListener {
-            intent_fooddtail(recommendDTO[2])
+            callRetrofit(recommendDTO[3])
         }
         mainbinding?.lunchFirst?.setOnClickListener {
-            intent_fooddtail(recommendDTO[3])
+            callRetrofit(recommendDTO[4])
         }
         mainbinding?.lunchSecond?.setOnClickListener {
-            intent_fooddtail(recommendDTO[4])
+            callRetrofit(recommendDTO[5])
         }
         mainbinding?.lunchThird?.setOnClickListener {
-            intent_fooddtail(recommendDTO[5])
+            callRetrofit(recommendDTO[6])
         }
         mainbinding?.dinnerFirst?.setOnClickListener {
-            intent_fooddtail(recommendDTO[6])
+            callRetrofit(recommendDTO[7])
         }
         mainbinding?.dinnerSecond?.setOnClickListener {
-            intent_fooddtail(recommendDTO[7])
+            callRetrofit(recommendDTO[8])
         }
         mainbinding?.dinnerThird?.setOnClickListener {
-            intent_fooddtail(recommendDTO[8])
+            callRetrofit(recommendDTO[9])
         }
         return mainbinding?.root
     }
@@ -65,40 +71,65 @@ class MainRecommand(var recommendDTO:ArrayList<RecommendDTO>) : Fragment() {
         for(recommend in recommendDTO){
             when(i) {
                 0 -> {
-                    show_recommend_image(recommend.imgurl!!, mainbinding?.breakfastFirst!!)
-                    i++
+                    mainbinding?.content?.text = recommend.introduce
+                    if(recommend.url != null){
+                        show_recommend_image(recommend.url!!, mainbinding?.mainRecommand!!)
+                        i++
+                    }
                 }
                 1 -> {
-                    show_recommend_image(recommend.imgurl!!, mainbinding?.breakfastSecond!!)
-                    i++
+                    if(recommend.url != null){
+                        show_recommend_image(recommend.url!!, mainbinding?.breakfastFirst!!)
+                        i++
+                    }
                 }
                 2 -> {
-                    show_recommend_image(recommend.imgurl!!, mainbinding?.breakfastThird!!)
-                    i++
+                    if(recommend.url != null){
+                        show_recommend_image(recommend.url!!, mainbinding?.breakfastSecond!!)
+                        i++
+                    }
                 }
                 3 -> {
-                    show_recommend_image(recommend.imgurl!!, mainbinding?.lunchFirst!!)
-                    i++
+                    if(recommend.url != null){
+                        show_recommend_image(recommend.url!!, mainbinding?.breakfastThird!!)
+                        i++
+                    }
                 }
                 4 -> {
-                    show_recommend_image(recommend.imgurl!!, mainbinding?.lunchSecond!!)
-                    i++
+                    if(recommend.url != null){
+                        show_recommend_image(recommend.url!!, mainbinding?.lunchFirst!!)
+                        i++
+                    }
                 }
                 5 -> {
-                    show_recommend_image(recommend.imgurl!!, mainbinding?.lunchThird!!)
-                    i++
+                    if(recommend.url != null){
+                        show_recommend_image(recommend.url!!, mainbinding?.lunchSecond!!)
+                        i++
+                    }
                 }
                 6 -> {
-                    show_recommend_image(recommend.imgurl!!, mainbinding?.dinnerFirst!!)
-                    i++
+                    if(recommend.url != null){
+                        show_recommend_image(recommend.url!!, mainbinding?.lunchThird!!)
+                        i++
+                    }
                 }
                 7 -> {
-                    show_recommend_image(recommend.imgurl!!, mainbinding?.dinnerSecond!!)
-                    i++
+                    if(recommend.url != null){
+                        show_recommend_image(recommend.url!!, mainbinding?.dinnerFirst!!)
+                        i++
+                    }
                 }
                 8 -> {
-                    show_recommend_image(recommend.imgurl!!, mainbinding?.dinnerThird!!)
-                    i++
+                    if(recommend.url != null){
+                        show_recommend_image(recommend.url!!, mainbinding?.dinnerSecond!!)
+                        i++
+                    }
+                }
+                9 -> {
+                    if(recommend.url != null){
+                        show_recommend_image(recommend.url!!, mainbinding?.dinnerThird!!)
+                        i++
+                    }
                 }
             }
         }
@@ -106,14 +137,39 @@ class MainRecommand(var recommendDTO:ArrayList<RecommendDTO>) : Fragment() {
 
     fun show_recommend_image(url: String, view: ImageView){
         Glide.with(this)
-            .load(url)
+            .load("http://192.168.137.1:3000/images/" + url)
             .into(view)
     }
 
-    fun intent_fooddtail(recommend: RecommendDTO){
+    fun callRetrofit(recommend: RecommendDTO) {
+        val id = recommend.id.toString()
+        var ingredient = ArrayList<String>()
+        RetrofitClient.api.postIngredient(id)
+            .enqueue(object : retrofit2.Callback<ArrayList<String>> {
+                override fun onResponse(
+                    call: Call<ArrayList<String>>,
+                    response: Response<ArrayList<String>>
+                ) {
+                    for (i in response.body()!!) {
+                        ingredient.add(i)
+                    }
+                    intent_fooddtail(recommend, ingredient)
+                }
+
+                override fun onFailure(call: Call<ArrayList<String>>, t: Throwable) {
+                    println("여기 오류 ${t}")
+                }
+            })
+    }
+
+    fun intent_fooddtail(recommend: RecommendDTO, ingredient: ArrayList<String>){
         val intent = Intent(activity, FoodDtail::class.java)
-        intent.putExtra("imgurl", recommend.imgurl)
-        intent.putExtra("foodname", recommend.foodname)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+        intent.putExtra("imgurl", recommend.url)
+        intent.putExtra("foodname", recommend.name)
+        intent.putExtra("content", recommend.introduce)
+        intent.putExtra("ingredient", ingredient)
+        intent.putExtra("recipe-id", recommend.id.toString())
         startActivity(intent)
     }
 }

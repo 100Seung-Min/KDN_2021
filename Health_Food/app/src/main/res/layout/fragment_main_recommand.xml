@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="300dp">
             <ImageView
+                android:id="@+id/main_recommand"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/unknown"/>
@@ -44,6 +45,7 @@
                     android:layout_height="1dp"
                     android:background="@color/white"/>
                 <TextView
+                    android:id="@+id/content"
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -70,19 +72,19 @@
             android:layout_height="100dp"
             android:orientation="horizontal"
             android:weightSum="3">
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/breakfast_first"/>
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/breakfast_second"/>
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/breakfast_third"/>
         </LinearLayout>
@@ -102,19 +104,19 @@
             android:layout_height="100dp"
             android:orientation="horizontal"
             android:weightSum="3">
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/lunch_first"/>
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/lunch_second"/>
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/lunch_third"/>
         </LinearLayout>
@@ -134,19 +136,19 @@
             android:layout_height="100dp"
             android:orientation="horizontal"
             android:weightSum="3">
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/dinner_first"/>
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/dinner_second"/>
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/dinner_third"/>
         </LinearLayout>

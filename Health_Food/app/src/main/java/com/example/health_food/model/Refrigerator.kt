@@ -1,6 +1,8 @@
 package com.example.health_food.model
 
 data class Refrigerator(
-    val foodurl: String,
-    val foodname: String
+    val id:Int,
+    val url: String,
+    val name: String,
+    val ingredient: Int
 )

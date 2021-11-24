@@ -11,12 +11,13 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.health_food.R
+import com.example.health_food.model.Food
 import com.example.health_food.model.Refrigerator
 
-class RecyclerViewAdapter2(val itemlist: ArrayList<String>, val itemClick : (String) -> Unit): RecyclerView.Adapter<RecyclerViewAdapter2.ViewHolder>() {
-    inner class ViewHolder(v: View, itemClick: (String) -> Unit): RecyclerView.ViewHolder(v) {
-        fun bind(item: String){
-            itemView.findViewById<TextView>(R.id.refrigerator_item_txt).text = item
+class RecyclerViewAdapter2(val itemlist: ArrayList<Food>, val itemClick : (Food) -> Unit): RecyclerView.Adapter<RecyclerViewAdapter2.ViewHolder>() {
+    inner class ViewHolder(v: View, itemClick: (Food) -> Unit): RecyclerView.ViewHolder(v) {
+        fun bind(item: Food){
+            itemView.findViewById<TextView>(R.id.refrigerator_item_txt).text = item.name
             itemView.findViewById<Button>(R.id.delete_refrigerator_btn).setOnClickListener { itemClick(item) }
         }
     }

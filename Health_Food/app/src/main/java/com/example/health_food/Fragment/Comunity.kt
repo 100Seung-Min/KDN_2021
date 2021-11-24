@@ -16,7 +16,7 @@ import com.example.health_food.retrofit.RetrofitClient
 import retrofit2.Call
 import retrofit2.Response
 
-class Comunity : Fragment() {
+class Comunity(val userId: String) : Fragment() {
 
     lateinit var binding: FragmentComunityBinding
 
@@ -38,7 +38,6 @@ class Comunity : Fragment() {
                 for(i in response.body()!!){
                     itemlist.add(i)
                     recyclerview()
-                    println("여기 ${i}")
                 }
             }
 
@@ -57,7 +56,7 @@ class Comunity : Fragment() {
     }
 
     fun recyclerview(){
-        val adapter = RecyclerViewAdapter3(itemlist, context)
+        val adapter = RecyclerViewAdapter3(itemlist, context, userId)
 
         binding.communityRecyclerview.adapter = adapter
         binding.communityRecyclerview.layoutManager = LinearLayoutManager(context)
