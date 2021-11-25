@@ -13,7 +13,7 @@ object RetrofitClient {
             .create()
         var retrofit = Retrofit.Builder()
 //            .baseUrl("http://10.120.74.70:3000")
-            .baseUrl("http://192.168.137.1:3000")
+            .baseUrl("http://10.120.74.70:3000")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
         api = retrofit.create(RetrofitInterface::class.java)
